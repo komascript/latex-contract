@@ -8,14 +8,14 @@ This is the official successor to the former KOMA-Script package `scrjura`.
 The development has just begun …
 
 - [x] creating a new repository
-- [ ] copying `scrjura.dtx` from KOMA-Script as `contract.dtx` to the new
+- [x] copying `scrjura.dtx` from KOMA-Script as `contract.dtx` to the new
       repository
 - [ ] creating a new build environment:
   - [ ] `README.md`
   - [x] `LICENSE.md`
-  - [ ] `build.lua`
+  - [x] `build.lua`
   - [ ] test files
-- [ ] renaming several internals of `contract`
+- [x] renaming several internals of `contract`
 - [ ] adding user documentation based on the `scrjura` chapters of the English
       and German KOMA-Script manual
 - [ ] [creating the first
