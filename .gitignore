@@ -19,7 +19,12 @@
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-# *.pdf
+*.pdf
+
+## l3build
+./build/*
+*-ctan.zip
+*-ctan.curlopt
 
 ## Generated if empty string is given at "Please type another file name for output:"
 .pdf
