@@ -22,7 +22,7 @@
 *.pdf
 
 ## l3build
-./build/*
+build
 *-ctan.zip
 *-ctan.curlopt
 
