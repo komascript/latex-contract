@@ -11,7 +11,7 @@ The development has just begun …
 - [ ] copying `scrjura.dtx` from KOMA-Script as `contract.dtx` to the new repository
 - [ ] creating a new build environment:
   - [ ] `README.md`
-  - [ ] `LICENSE.md`
+  - [x] `LICENSE.md`
   - [ ] `build.lua`
   - [ ] test files
 - [ ] renaming several internals of `contract`
