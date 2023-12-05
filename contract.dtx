@@ -16,7 +16,7 @@
 %
 % The Current Maintainer and author of this work is Markus Kohm.
 %
-% The KOMA-Script bundle consists of all files listed in MANIFEST.md.
+% This work consists of the files listed in MANIFEST.md.
 % ======================================================================
 %<identify>%%% --- docstrip run: identify ---
 %<doc>%%% --- docstrip run: doc ---
@@ -73,9 +73,12 @@
 %</ins>
 %<*dtx>
 \documentclass[USenglish,ngerman]{koma-script-source-doc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage[main=USenglish]{babel}
 \usepackage{graphicx}
-\usepackage{listings}
+\usepackage[colorize]{scrguide-listings}
+\usepackage{scrguide-doclink}
 \usepackage{booktabs}
 \usepackage{csquotes}
 \usepackage[style=alphabetic]{biblatex}
@@ -177,28 +180,6 @@
 \makeatother
 \newcommand*{\important}[2][]{}
 \newcommand*{\textnote}[1]{}
-\lstset{%
-  basicstyle=\ttfamily,%
-  columns=fullflexible,keepspaces,%
-  aboveskip=.4\baselineskip,%
-  belowskip=\dp\strutbox plus 1pt minus .5pt,%
-  literate=%
-    {Ö}{{\"O}}1
-    {Ä}{{\"A}}1
-    {Ü}{{\"U}}1
-    {ß}{{\ss}}1
-    {ü}{{\"u}}1
-    {ä}{{\"a}}1
-    {ö}{{\"o}}1
-    {»}{{\guillemetright}}1
-    {«}{{\guillemetleft}}1
-}%
-\lstnewenvironment{lstcode}[1][]{%
-  \lstset{language=[LaTeX]TeX,basicstyle=\ttfamily\small,#1}%
-}{}%
-\newcommand*{\lstinputcode}[1][]{%
-  \lstinputlisting[{language=[LaTeX]TeX,basicstyle=\ttfamily\small,#1}]%
-}
 \newenvironment{Example}{%
   \lstset{belowskip=0pt plus 1pt minus .5pt}%
   \labeling{{\usekomafont{disposition}\Examplename:}}
@@ -210,7 +191,76 @@
 \newcaptionname{ngerman}{\Examplename}{Beispiel}
 \newcommand{\iffree}[2]{#1}
 \DeclareTOCStyleEntry[dynnumwidth,dynindent]{section}{section}
-\DeclareTOCStyleEntries[dynnumwidth,dynindent]{subsection}{subsection,subsubsection}  
+\DeclareTOCStyleEntries[dynnumwidth,dynindent]{subsection}{subsection,subsubsection}
+\usepackage{hyperref}
+\DeclareLinkFallback{Macro}{arabic}
+  {https://en.wikibooks.org/wiki/LaTeX/Counters#Counter_style}
+\DeclareLinkFallback{Macro}{begin}
+  {https://en.wikibooks.org/wiki/LaTeX/Basics#LaTeX_environments}
+\DeclareLinkFallback{Macro}{bfseries}
+  {https://en.wikibooks.org/wiki/LaTeX/Fonts#Font_styles}
+\DeclareLinkFallback{Macro}{end}
+  {https://en.wikibooks.org/wiki/LaTeX/Basics#LaTeX_environments}
+\DeclareLinkFallback{Macro}{refstepcounter}
+  {https://en.wikibooks.org/wiki/LaTeX/Counters#Counter_manipulation}
+\DeclareLinkFallback{Macro}{sffamily}
+  {https://en.wikibooks.org/wiki/LaTeX/Fonts#Font_styles}
+  
+\DeclareLinkFallback{Macro}{defineshorthand}
+  {file:../babel/babel.pdf#subsection.1.10}  
+\DeclareLinkFallback{Macro}{useshorthand}
+  {file:../babel/babel.pdf#subsection.1.10}  
+  
+\DeclareLinkFallback{Macro}{setkeys}
+  {file:../graphics/keyval.pdf#section.3}
+
+\DeclareLinkFallback{Macro}{documentclass}
+  {file:../lshort-english/lshort.pdf#12}
+\DeclareLinkFallback{Macro}{dots}
+  {file:../lshort-english/lshort.pdf#a7}
+\DeclareLinkFallback{Macro}{label}
+  {file:../lshort-english/lshort.pdf#2b}
+\DeclareLinkFallback{Macro}{large}
+  {file:../lshort-english/lshort.pdf#b3}
+\DeclareLinkFallback{Macro}{pageref}
+  {file:../lshort-english/lshort.pdf#2b}
+\DeclareLinkFallback{Macro}{paragraph}
+  {file:../lshort-english/lshort.pdf#2a}
+\DeclareLinkFallback{Macro}{ref}
+  {file:../lshort-english/lshort.pdf#2b}
+\DeclareLinkFallback{Macro}{section}
+  {file:../lshort-english/lshort.pdf#2a}
+\DeclareLinkFallback{Macro}{subparagraph}
+  {file:../lshort-english/lshort.pdf#2a}
+\DeclareLinkFallback{Macro}{usepackage}
+  {file:../lshort-english/lshort.pdf#13}
+
+\DeclareLinkFallback{Macro}{addsec}
+  {file:../koma-script/scrguide-en.pdf#desc:maincls.cmd.addsec}
+\DeclareLinkFallback{Macro}{markboth}
+  {file:../koma-script/scrguide-en.pdf#desc:maincls.cmd.markboth}
+\DeclareLinkFallback{Macro}{markright}
+  {file:../koma-script/scrguide-en.pdf#desc:maincls.cmd.markright}
+
+\DeclareLinkFallback{Macro}{newkomafont}
+  {file:../koma-script/scrguide-en.pdf#desc:maincls-experts.cmd.newkomafont}
+
+\DeclareLinkFallback{Macro}{providecaptionname}
+  {file:../koma-script/scrguide-en.pdf#desc:scrbase.cmd.providecaptionname}
+
+\DeclareLinkFallback{Macro}{KOMAoption}
+  {file:../koma-script/scrguide-en.pdf#desc:scrextend.cmd.KOMAoption}
+\DeclareLinkFallback{Macro}{KOMAoptions}
+  {file:../koma-script/scrguide-en.pdf#desc:scrextend.cmd.KOMAoptions}
+\DeclareLinkFallback{Macro}{addtokomafont}
+  {file:../koma-script/scrguide-en.pdf#desc:scrextend.cmd.addtokomafont}
+\DeclareLinkFallback{Macro}{setkomafont}
+  {file:../koma-script/scrguide-en.pdf#desc:scrextend.cmd.setkomafont}
+\DeclareLinkFallback{Macro}{usekomafont}
+  {file:../koma-script/scrguide-en.pdf#desc:scrextend.cmd.usekomafont}
+
+\DeclareLinkFallback{Macro}{DeclareTOCStyleEntry}
+  {file:../koma-script/scrguide-en.pdf#desc:tocbasic.cmd.DeclareTOCStyleEntry}
 \begin{document}
   \nocite{pkg:koma-script}
   \DocInput{contract.dtx}
@@ -304,7 +354,7 @@ Heiner Richter of the Hochschule Stralsund University of Applied Sciences.
 %
 % You can load the package as common using:
 % \begin{quote}
-%  |\usepackage|\oarg{options}|{contract}|
+%  \cs{usepackage}\oarg{options}|{contract}|
 % \end{quote}
 % In case of package \pkg*{contract} the \meta{options} are
 % \meta{key}|=|\meta{value} options.
@@ -562,12 +612,10 @@ one line afterwards. You can change the size of these skips with the
 \Option{postskip} options. The new values apply  not only to the current
 clause but from the current clause until the end of the current contract
 environment. You can also make the appropriate settings in advance with
-\begin{flushleft}\quad\small
-  \textbf{\Macro{setkeys}}\PParameter{contract}%
-  \PParameter{preskip=\PName{skip},\\
-    \normalsize\quad\small
-    \hspace{11.5em}postskip=\PName{skip}}
-\end{flushleft}
+\begin{quote}\small
+  \textbf{\Macro{setkeys}}\PParameter{contract}%^^A
+  \PParameter{preskip=\PName{skip},postskip=\PName{skip}}
+\end{quote}
 regardless of the specific clause and outside of a contract environment. You
 can also set these options inside the preamble after loading
 \pkg*{contract}, but you cannot set them while loading the package or by
@@ -885,7 +933,7 @@ even use the dot as an abbreviation for a dot and a new sentence number:
 \begin{lstcode}[moretexcs={useshorthands,defineshorthand}]
   \defineshorthand{'.}{. \Sentence\ignorespaces}
 \end{lstcode}
-For details regarding \Macro{useshorthands} and \Macro{defineshorthands},
+For details regarding \Macro{useshorthands} and \Macro{defineshorthand},
 please consult the manual of the \pkg{babel} package (see
 \cite{package:babel}). You can find an example of their application in
 \autoref{sec:\LabelBase.example}, \autopageref{sec:\LabelBase.example}.%
@@ -2209,7 +2257,7 @@ detailed user feedback.%
   }{}%
 %    \end{macrocode}
 % \changes{scrjura-v0.9c}{2015/05/13}{defining \cs{the\dots Clause}}
-% \changes{scrjura-v0.9f}{2016/02/24}{\cs{protect}\cs{\@nameuse} instead of
+% \changes{scrjura-v0.9f}{2016/02/24}{\cs{protect}\cs{@nameuse} instead of
 %     \cs{csname}\dots\cs{endcsname}}
 %    \begin{macrocode}
   \expandafter\renewcommand\expandafter*\csname the#1Clause\endcsname{%
@@ -2432,7 +2480,7 @@ detailed user feedback.%
       \cl@Clause
     \endgroup
 %    \end{macrocode}
-% \changes{scrjura-v0.9f}{2016/02/24}{\cs{protect}\cs{\@nameuse} instead of
+% \changes{scrjura-v0.9f}{2016/02/24}{\cs{protect}\cs{@nameuse} instead of
 %   \cs{csname}\dots\cs{endcsname}}
 % \changes{scrjura-v3.41}{2023/06/24}{update of \cs{@currentcounter} added}
 %    \begin{macrocode}
