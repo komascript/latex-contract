@@ -79,6 +79,7 @@
 \usepackage{graphicx}
 \usepackage[colorize]{scrguide-listings}
 \usepackage{scrguide-doclink}
+\usepackage{scrguide-oldemu}
 \usepackage{booktabs}
 \usepackage{csquotes}
 \usepackage[style=alphabetic]{biblatex}
@@ -117,32 +118,16 @@
 \newcommand*{\Index}{\index}
 \newcommand*{\LabelBase}{contract}
 \newcommand*{\seclabel}[1]{\label{sec:\LabelBase.#1}}
-\newcommand*{\PValue}{\texttt}
-\newcommand*{\PName}{\meta}
-\newcommand*{\Option}{\opt}
-\newcommand*{\OptionValue}[2]{\texttt{#1=\linebreak[2]#2}}
-\newcommand*{\OptionVName}[2]{\texttt{#1=\linebreak[2]\meta{#2}}}
-\newcommand*{\Length}{\len}
-\newcommand*{\Counter}{\cnt}
 \newcommand*{\BeginIndexGroup}{}
 \newcommand*{\BeginIndex}[2]{}
 \newcommand*{\EndIndex}[2]{}
 \newcommand*{\EndIndexGroup}{}
-\newcommand*{\Class}{\cls}
-\newcommand*{\PageStyle}{\pstyle}
 \newcommand*{\IndexCounter}{\SpecialCounterIndex}
 \newcommand*{\IndexCmd}{\SpecialCommandIndex}
 \newcommand*{\IndexOption}{\SpecialOptionIndex}
 \newcommand*{\IndexPackage}[1]{}
 \newcommand*{\IndexFontElement}{\SpecialKOMAfontIndex}
-\newcommand*{\textKValue}{\optvalue}
-\newcommand*{\SeeNote}[1]{\nobreak}
-\newcommand*{\Macro}{\cs}
-\newcommand*{\Environment}{\env}
-\newcommand*{\OParameter}{\oarg}
-\newcommand*{\Parameter}{\marg}
-\newcommand*{\PParameter}[1]{\texttt{\{#1\}}}
-\newcommand*{\POParameter}[1]{\texttt{[#1]}}
+\newcommand*{\IndexEnvironment}{\SpecialEnvIndex}
 \newcommand*{\LabelFontElement}[1]{%
   \DescribeKOMAfont[noprint]{#1}%
   {\def\meta##1{/##1/}\phantomsection\label{desc:\LabelBase.fontelement.#1}}}
@@ -167,19 +152,17 @@
 \makeatletter
 \newenvironment{Declaration}{%
   \begin{lrbox}{\@tempboxa}
-}{\end{lrbox}}
+}{\end{lrbox}\ignorespacesafterend}
 \newcommand*{\DescRef}[1]{\@DescRef#1\@nil}
 \def\@DescRef #1.#2.#3\@nil{%
-  \Ifstr{#2}{counter}{\cnt{#3}}{%
-    \Ifstr{#2}{cmd}{\cs{#3}}{%
-      \Ifstr{#2}{env}{\env{#3}}{%
-        \Ifstr{#2}{option}{\opt{#3}}{%
+  \Ifstr{#2}{counter}{\cnt{#3}\IndexCounter{#3}}{%
+    \Ifstr{#2}{cmd}{\cs{#3}\IndexCmd{#3}}{%
+      \Ifstr{#2}{env}{\env{#3}\IndexEnvironment{#3}}{%
+        \Ifstr{#2}{option}{\opt{#3}\IndexOption{#3}}{%
           \undefined
         }}}}%
 }
 \makeatother
-\newcommand*{\important}[2][]{}
-\newcommand*{\textnote}[1]{}
 \newenvironment{Example}{%
   \lstset{belowskip=0pt plus 1pt minus .5pt}%
   \labeling{{\usekomafont{disposition}\Examplename:}}
@@ -192,7 +175,6 @@
 \newcommand{\iffree}[2]{#1}
 \DeclareTOCStyleEntry[dynnumwidth,dynindent]{section}{section}
 \DeclareTOCStyleEntries[dynnumwidth,dynindent]{subsection}{subsection,subsubsection}
-\usepackage{hyperref}
 \DeclareLinkFallback{Macro}{arabic}
   {https://en.wikibooks.org/wiki/LaTeX/Counters#Counter_style}
 \DeclareLinkFallback{Macro}{begin}
@@ -292,9 +274,9 @@
 %\iffalse
 %<*doc&en>
 %\fi
-Package \pkg*{contract} is a \KOMAScript{} spin-off. It has been released
-from 2011 till 2023 as \pkg*{scrjura}. With \KOMAScript{} 3.42 \pkg*{scrjura}
-is removed from \KOMAScript{} and released as new package \pkg*{contract}.
+Package \pkg*{contract} is a \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} spin-off. It has been released
+from 2011 till 2023 as \pkg*{scrjura}. With \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} 3.42 \pkg*{scrjura}
+is removed from \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} and released as new package \pkg*{contract}.
 %\iffalse
 %</doc&en>
 %\fi
@@ -313,8 +295,8 @@ is removed from \KOMAScript{} and released as new package \pkg*{contract}.
 %<*doc&de>
 %\fi
 Das Paket \pkg*{contract} ist eine Abspaltung von \KOMAScript. Es wurde von
-2011 bis 2023 als \pkg*{scrjura} verteilt. Mit \KOMAScript{} 3.42 wurde
-\pkg*{scrjura} aus \KOMAScript{} entfernt und stattdessen als neues Paket
+2011 bis 2023 als \pkg*{scrjura} verteilt. Mit \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} 3.42 wurde
+\pkg*{scrjura} aus \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} entfernt und stattdessen als neues Paket
 \pkg*{contract} veröffentlicht.
 %\iffalse
 %</doc&de>
@@ -373,24 +355,27 @@ Heiner Richter of the Hochschule Stralsund University of Applied Sciences.
 % options.
 % \begin{description}
 % \item[Note:] Currently the options are still implemented using the internal
-%   \KOMAScript{} package \pkg{scrkbase}. Therefore you could also setup
-%   \meta{options} using the \KOMAScript{} commands \cs{KOMAoptions} or
-%   \cs{KOMAoption}, which are described in
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} package
+%   \href{https://www.ctan.org/pkg/koma-script}{\pkg*{scrkbase}}. Therefore
+%   you could also setup \meta{options} using the
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} commands
+%   \cs{KOMAoptions} or \cs{KOMAoption}, which are described in
 %   \cite{pkg:koma-script:manual:en}. Moreover, because of the implementation,
 %   currently \cs{contractSetup} could also be used to setup other
-%   \KOMAScript{} options not related to package \pkg*{contract}. However, you
-%   should avoid this, because it will fail, when the implementation will be
-%   changed.
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} options not
+%   related to package \pkg*{contract}. However, you should avoid this,
+%   because it will fail, when the implementation will be changed.
 % \end{description}
 %
 % \section{Changing the fonts of several elements}
 % \seclabel{textmarkup}
 %
 % Currently package \pkg*{contract} still uses the font selection features of
-% the internal \KOMAScript{} package \pkg{scrkbase}. So the commands
-% \cs{setkomafont}, \cs{addtokomafont}, and \cs{usekomafont}, wich are
-% described in \cite{pkg:koma-script:manual:en}, can be used to
-% change the fonts of the following elements:
+% the internal \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript}
+% package \pkg{scrkbase}. So the commands \cs{setkomafont},
+% \cs{addtokomafont}, and \cs{usekomafont}, wich are described in
+% \cite{pkg:koma-script:manual:en}, can be used to change the fonts of the
+% following elements:
 % \begin{description}
 % \item[{\fnt{Clause}\DescribeKOMAfont[noprint]{Clause}:}] \hfill\\
 %   Alias for \fnt{\meta{environment}.Clause} within any contract environment,
@@ -420,7 +405,8 @@ Heiner Richter of the Hochschule Stralsund University of Applied Sciences.
 %   \pkg*{contract}. Alternatively, the commands may be released under a new
 %   name and as part of a new package, allowing other package authors to
 %   access them. Alternatively the font elements will be defined and used
-%   only, if your are using a \KOMAScript{} class as well.
+%   only, if your are using a
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} class as well.
 % \end{description}
 %
 %\iffalse
@@ -432,7 +418,8 @@ Heiner Richter of the Hochschule Stralsund University of Applied Sciences.
 
 The headings of clauses can also be added automatically to the table of
 contents, if desired. For this the package uses command
-\DescRef{tocbasic.cmd.DeclareTOCStyleEntry} of \KOMAScript{} package
+\DescRef{tocbasic.cmd.DeclareTOCStyleEntry} of
+\href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} package
 \pkg{tocbasic} to define an entry level named \PValue{cpar}.
 
 % \DescribeOption{juratotoc}
@@ -444,21 +431,20 @@ contents, if desired. For this the package uses command
 \end{Declaration}
 Clauses\Index{clause} are shown in the table of contents only if their
 \PName{level number} is less than or equal to the
-\DescRef{maincls.counter.tocdepth}%
-\important{\DescRef{maincls.counter.tocdepth}}\IndexCounter{tocdepth} counter%
-\SeeNote{ (see \autoref{sec:maincls.toc},
-  \DescPageRef{maincls.counter.tocdepth})}%
-. By default, the \PName{level number} is \Length{maxdimen}, which is also
-used if the option is switched off using
-\OptionValue{juratotoc}{false}. Because the \DescRef{maincls.counter.tocdepth}
-counter usually has a one-digit value, clause entries are therefore not
-normally displayed in the table of contents.
+\DescRef{maincls.counter.tocdepth}
+\important{\DescRef{maincls.counter.tocdepth}}
+counter\SeeNote{ (see \autoref{sec:maincls.toc},
+  \DescPageRef{maincls.counter.tocdepth})}.  By default, the \PName{level
+  number} is \Length{maxdimen}, which is also used if the option is switched
+off using \OptionValue{juratotoc}{false}. Because the
+\DescRef{maincls.counter.tocdepth} counter usually has a one-digit value,
+clause entries are therefore not normally displayed in the table of contents.
 
 If you switch on the option using the \OptionValue{juratotoc}{true}, the
 \PName{level number} 2 is used so that clauses are shown in the table of
 contents on the same level as subsections. For the default setting of
 \DescRef{maincls.counter.tocdepth}, clauses are then shown in all
-\KOMAScript{} classes.
+\href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} classes.
 
 Internally usage of this option results in
 a call of
@@ -493,11 +479,12 @@ with the \PName{style} \PValue{default} and option
 The essential mechanisms of \pkg*{contract} are available only inside the
 contract environment.
 
+% \DescribeEnv{contract}
 \begin{Declaration}
   \begin{Environment}{contract}\end{Environment}
 \end{Declaration}
-Currently, this is the one and only environment for \pkg*{contract}. Using
-it activates automatic numbering of paragraphs and the
+Currently, this is the one and only predefined environment for
+\pkg*{contract}. Using it activates automatic numbering of paragraphs and the
 \DescRef{\LabelBase.cmd.Clause} and \DescRef{\LabelBase.cmd.SubClause}
 commands, which will be documented below, are given concrete form.
 
@@ -510,14 +497,14 @@ continued by the beginning of a new environment. However, you cannot end the
 environment within a clause.%
 \EndIndexGroup
 
-
+% \DescribeOption{contract}
 \begin{Declaration}
   \Option{contract}
 \end{Declaration}
 The whole document becomes a contract if you use this option while loading the
-package with \DescRef{\LabelBase.cmd.usepackage}%
+package with \DescRef{\LabelBase.cmd.usepackage}%^^A
 \important{\DescRef{\LabelBase.cmd.usepackage}} or as a global option with
-\DescRef{\LabelBase.cmd.documentclass}%
+\DescRef{\LabelBase.cmd.documentclass}%^^A
 \important{\DescRef{\LabelBase.cmd.documentclass}}. The document then behaves
 exactly as if it contained one \DescRef{\LabelBase.env.contract} environment.
 
@@ -525,7 +512,7 @@ Note\textnote{Attention!} that you cannot set the \Option{contract} option
 with \DescRef{\LabelBase.cmd.KOMAoption} or
 \DescRef{\LabelBase.cmd.KOMAoptions}. Thus you cannot switch the option off
 again. Instead, you should use a \DescRef{\LabelBase.env.contract} environment
-directly.%
+directly.%^^A
 \EndIndexGroup
 
 
@@ -535,7 +522,7 @@ directly.%
 \index{section|seealso{clause}}
 %\fi
 
-Clauses\footnote{%
+Clauses\footnote{%^^A
   In English, a ``clause'' in a legal document is a section, paragraph, or
   phrase that relates to a particular point. Although it is common in English
   to also use the terms ``article'' or ``section'' for what we here call a
@@ -549,8 +536,13 @@ other environments declared with
 \SeeNote{ (see \autoref{sec:\LabelBase.newenv},
   \DescPageRef{\LabelBase.cmd.DeclareNewJuraEnvironment})}.
 
+% \DescribeCommand{\Clause}
+% \DescribeCommand{\SubClause}
+% Each clause starts either with \cs{Clause}\oarg{options} or
+% \cs{SubClause}\oarg{options}.  The optional argument \meta{options} is a
+% comma separated list of options.
 \begin{Declaration}
-  \Macro{Clause}\OParameter{options}%
+  \Macro{Clause}\OParameter{options}%^^A
   \Macro{SubClause}\OParameter{options}
 \end{Declaration}
 These are the most important commands inside of a contract. Without using any
@@ -568,41 +560,41 @@ The most important of them will be discussed in more detail.
 
 \begin{table}
   \captionabove{Available properties for the optional argument of
-    \Macro{Clause} and \Macro{SubClause}}%
+    \Macro{Clause} and \Macro{SubClause}}%^^A
   \label{tab:Clause.options}
   \begin{desctabular}
-    \entry{\Option{dummy}}{%
+    \entry{\Option{dummy}}{%^^A
       The heading will not be printed but is counted in the automatic
-      numbering.%
-    }%
-    \entry{\OptionVName{head}{running head}}{%
+      numbering.%^^A
+    }%^^A
+    \entry{\OptionVName{head}{running head}}{%^^A
       If running heads are active, this \PName{running head} is used instead of
-      the clause \PName{title}.%
-    }%
-    \entry{\Option{nohead}}{%
-      The running head stays unchanged.%
-    }%
-    \entry{\Option{notocentry}}{%
-      Does not make an entry into the table of contents.%
-    }%
-    \entry{\OptionVName{number}{number}}{%
-      Uses \PName{number} for the output of the clause number.%
-    }%
-    \entry{\OptionVName{preskip}{skip}}{%
-      Changes the vertical \PName{skip} before the clause heading.%
-    }%
-    \entry{\OptionVName{postskip}{skip}}{%
-      Changes the vertical \PName{skip} after the clause heading.%
-    }%
-    \entry{\OptionVName{title}{title}}{%
+      the clause \PName{title}.%^^A
+    }%^^A
+    \entry{\Option{nohead}}{%^^A
+      The running head stays unchanged.%^^A
+    }%^^A
+    \entry{\Option{notocentry}}{%^^A
+      Does not make an entry into the table of contents.%^^A
+    }%^^A
+    \entry{\OptionVName{number}{number}}{%^^A
+      Uses \PName{number} for the output of the clause number.%^^A
+    }%^^A
+    \entry{\OptionVName{preskip}{skip}}{%^^A
+      Changes the vertical \PName{skip} before the clause heading.%^^A
+    }%^^A
+    \entry{\OptionVName{postskip}{skip}}{%^^A
+      Changes the vertical \PName{skip} after the clause heading.%^^A
+    }%^^A
+    \entry{\OptionVName{title}{title}}{%^^A
       The clause \PName{title} will be printed in addition to the clause
       number. This is also used as the default for the \PName{running head}
-      and the \PName{entry} in the table of contents.%
-    }%
-    \entry{\OptionVName{tocentry}{entry}}{%
+      and the \PName{entry} in the table of contents.%^^A
+    }%^^A
+    \entry{\OptionVName{tocentry}{entry}}{%^^A
       Regardless of the clause \PName{title}, an \PName{entry} into the
-      table of contents will be made, if such entries are activated.%
-    }%
+      table of contents will be made, if such entries are activated.%^^A
+    }%^^A
   \end{desctabular} 
 \end{table}
 
@@ -622,22 +614,22 @@ can also set these options inside the preamble after loading
 using \DescRef{\LabelBase.cmd.KOMAoptions} or
 \DescRef{\LabelBase.cmd.KOMAoption}.
 
-\BeginIndex{FontElement}{contract.Clause}\LabelFontElement{contract.Clause}%
-\BeginIndex{FontElement}{Clause}\LabelFontElement{Clause}%
+\BeginIndex{FontElement}{contract.Clause}\LabelFontElement{contract.Clause}%^^A
+\BeginIndex{FontElement}{Clause}\LabelFontElement{Clause}%^^A
 By default, clause headings use the font style
 \Macro{sffamily}\Macro{bfseries}\Macro{large}. You can change this font style
 at any time using the
 \FontElement{contract.Clause}\important{\FontElement{contract.Clause}} element
-with \DescRef{\LabelBase.cmd.setkomafont}%
+with \DescRef{\LabelBase.cmd.setkomafont}%^^A
 \important[i]{\DescRef{\LabelBase.cmd.setkomafont},
   \DescRef{\LabelBase.cmd.addtokomafont}} and
-\DescRef{\LabelBase.cmd.addtokomafont}%
+\DescRef{\LabelBase.cmd.addtokomafont}%^^A
 \SeeNote{ (see \autoref{sec:maincls.textmarkup},
-  \DescPageRef{\LabelBase.cmd.setkomafont})} . Inside the
+  \DescPageRef{\LabelBase.cmd.setkomafont})}. Inside the
 \DescRef{\LabelBase.env.contract} environment, you can also use
 \FontElement{Clause}\important{\FontElement{Clause}} instead of
-\FontElement{contract.Clause}.%
-\EndIndex{FontElement}{Clause}%
+\FontElement{contract.Clause}.%^^A
+\EndIndex{FontElement}{Clause}%^^A
 \EndIndex{FontElement}{contract.Clause}
 
 With the \Option{title}\important[i]{\Option{title}, \Option{head},
@@ -669,10 +661,10 @@ a contract.
 
 Note\textnote{Attention!} that the \Option{dummy} option only accepts the
 values \PValue{true} and \PValue{false}. All other values are usually ignored,
-but can lead to an error message in the worst case scenario.%
+but can lead to an error message in the worst case scenario.%^^A
 \EndIndexGroup
 
-
+% \DescribeCommand{\Clauseformat}
 \begin{Declaration}
   \Macro{Clauseformat}\Parameter{number}
 \end{Declaration}
@@ -684,80 +676,80 @@ the number as the only argument. The default is the following:
 \end{lstcode}
 This produces the section mark, \Macro{S}\IndexCmd{S} (\S), followed by a
 non-breaking space and the number. If you redefine this command, be sure it
-remains expandable.%
+remains expandable.%^^A
 \EndIndexGroup
 
 
 \begin{Declaration}
   \OptionVName{juratitlepagebreak}{simple switch}
-\end{Declaration}%
+\end{Declaration}%^^A
 Usually, page breaks are prohibited within heading of all kinds. However, some
 lawyers require page breaks within clause headings. You can allow such a break
 by using \Option{juratitlepagebreak}\important{\Option{juratitlepagebreak}}.
 You can find the available values for \PName{simple switch} in
-\autoref{tab:truefalseswitch}, \autopageref{tab:truefalseswitch}.%
+\autoref{tab:truefalseswitch}, \autopageref{tab:truefalseswitch}.%^^A
 \EndIndexGroup
   
 \begin{Declaration}
   \OptionVName{clausemark}{value}
-\end{Declaration}%
+\end{Declaration}%^^A
 Since clauses are a subordinate structure with independent numbering, they do
 not produce running heads by default. You can, however, create running heads
 with various settings. You can find the available \PName{values} and their
-meanings in \autoref{tab:\LabelBase.clausemark}.%
-%
+meanings in \autoref{tab:\LabelBase.clausemark}.%^^A
+%^^A
 \begin{table}
   \captionabove{Available values for the \Option{clausemark} option to
-    activate running heads}%
-  \label{tab:\LabelBase.clausemark}%
+    activate running heads}%^^A
+  \label{tab:\LabelBase.clausemark}%^^A
   \begin{desctabular}
-    \entry{\PValue{both}}{%
+    \entry{\PValue{both}}{%^^A
       Clauses generate left and right marks for running heads, if the document
-      provides automatic running heads.%
-      \IndexOption{clausemark~=\textKValue{both}}%
-    }%
-    \entry{\PValue{false}, \PValue{off}, \PValue{no}}{%
+      provides automatic running heads.%^^A
+      \IndexOption{clausemark\quotechar=\textKValue{both}}%^^A
+    }%^^A
+    \entry{\PValue{false}, \PValue{off}, \PValue{no}}{%^^A
       Clauses do not generate marks for running heads and therefore do not
-      change running heads.%
-      \IndexOption{clausemark~=\textKValue{false}}%
-    }%
-    \entry{\PValue{forceboth}}{%
+      change running heads.%^^A
+      \IndexOption{clausemark\quotechar=\textKValue{false}}%^^A
+    }%^^A
+    \entry{\PValue{forceboth}}{%^^A
       Clauses use \DescRef{maincls.cmd.markboth} to generate left and right
       marks for running heads even if the document does not provide automatic
-      running heads for the current page style.%
-      \IndexOption{clausemark~=\textKValue{forceboth}}%
-    }%
-    \entry{\PValue{forceright}}{%
+      running heads for the current page style.%^^A
+      \IndexOption{clausemark\quotechar=\textKValue{forceboth}}%^^A
+    }%^^A
+    \entry{\PValue{forceright}}{%^^A
       Clauses use \DescRef{maincls.cmd.markright} to generate right marks for
       running heads even if the document does not provide automatic running
-      heads for the current page style.%
-      \IndexOption{clausemark~=\textKValue{forceright}}%
-    }%
-    \entry{\PValue{right}}{%
+      heads for the current page style.%^^A
+      \IndexOption{clausemark\quotechar=\textKValue{forceright}}%^^A
+    }%^^A
+    \entry{\PValue{right}}{%^^A
       Clauses generate right marks for running heads, if the document provides
-      automatic running heads.%
-      \IndexOption{clausemark~=\textKValue{right}}%
-    }%
+      automatic running heads.%^^A
+      \IndexOption{clausemark\quotechar=\textKValue{right}}%^^A
+    }%^^A
   \end{desctabular}
 \end{table}
-%
+%^^A
 \EndIndexGroup
 
 
 \subsection{Paragraphs}
 \seclabel{par}
 \BeginIndexGroup
-\BeginIndex{}{paragraph>numbering}%
+\BeginIndex{}{paragraph>numbering}%^^A
 Within clauses, \pkg*{contract} usually numbers paragraphs automatically.
 With this, the paragraphs provide a powerful structuring element, similar to
 \DescRef{maincls.cmd.paragraph} or \DescRef{maincls.cmd.subparagraph} in
 normal documents. For this reason, contracts usually use a vertical skip
 between paragraphs. The \pkg*{contract} package does not provide its own
-mechanism for this. Instead, it uses the \DescRef{maincls.option.parskip}%
+mechanism for this. Instead, it uses the \DescRef{maincls.option.parskip}%^^A
 \IndexOption{parskip}\important{\DescRef{maincls.option.parskip}} option of
-the \KOMAScript{} classes%
+the \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} classes%^^A
 \SeeNote{ (see \autoref{sec:maincls.parmarkup},
-  \DescPageRef{maincls.option.parskip})}%
+  \DescPageRef{maincls.option.parskip})}%^^A
 .
 
 
@@ -766,41 +758,41 @@ the \KOMAScript{} classes%
 \end{Declaration}
 The default numbering of paragraphs is \OptionValue{parnumber}{auto} and
 \OptionValue{parnumber}{true}. Sometimes you may need to disable the automatic
-numbering. You can do this with \OptionValue{parnumber}{false}%
-\important{\OptionValue{parnumber}{false}}%
-\IndexOption{parnumber~=\textKValue{false}}. In this case, only the sentence
+numbering. You can do this with \OptionValue{parnumber}{false}%^^A
+\important{\OptionValue{parnumber}{false}}%^^A
+\IndexOption{parnumber\quotechar=\textKValue{false}}. In this case, only the sentence
 numbering is reset.
 
 To implement this option, it has been necessary to hook into the
 paragraph-building mechanism of \LaTeX. In some rare cases, this can have a
 negative effect. If so, you can undo the change with
-\OptionValue{parnumber}{manual}%
-\important{\OptionValue{parnumber}{manual}}%
-\IndexOption{parnumber~=\textKValue{manual}}. On the other hand, \LaTeX{}
+\OptionValue{parnumber}{manual}%^^A
+\important{\OptionValue{parnumber}{manual}}%^^A
+\IndexOption{parnumber\quotechar=\textKValue{manual}}. On the other hand, \LaTeX{}
 itself sometimes undoes the change. In those cases you can activate it again
-with \OptionValue{parnumber}{auto}%
-\important{\OptionValue{parnumber}{auto}}%
-\IndexOption{parnumber~=\textKValue{auto}}.
+with \OptionValue{parnumber}{auto}%^^A
+\important{\OptionValue{parnumber}{auto}}%^^A
+\IndexOption{parnumber\quotechar=\textKValue{auto}}.
 
 Clauses that consist of a single paragraph do not automatically receive a
 paragraph number. For this to work, there must not be two clauses with an
 identical number in a document. However should you ever need such numbering,
 you should switch to another contract environment (see
-\DescRef{\LabelBase.cmd.DeclareNewJuraEnvironment}%
+\DescRef{\LabelBase.cmd.DeclareNewJuraEnvironment}%^^A
 \SeeNote{, \autoref{sec:\LabelBase.newenv},
-  \DescPageRef{\LabelBase.cmd.DeclareNewJuraEnvironment}}%
+  \DescPageRef{\LabelBase.cmd.DeclareNewJuraEnvironment}}%^^A
 ). Note\textnote{Attention!} that the number of paragraphs in a clause is not
 available before the end of the clause. Therefore you need a least two
-\LaTeX{} runs before the automatic paragraph numbering is correct.%
+\LaTeX{} runs before the automatic paragraph numbering is correct.%^^A
 \EndIndexGroup
 
 
 \begin{Declaration}
-  \Counter{par}%
-  \Macro{thepar}%
-  \Macro{parformat}%
+  \Counter{par}%^^A
+  \Macro{thepar}%^^A
+  \Macro{parformat}%^^A
   \Macro{parformatseparation}
-\end{Declaration}%
+\end{Declaration}%^^A
 For numbering the paragraphs inside a clause we use the \Counter{par} counter.
 The output of \Macro{thepar} will display an Arabic number, because the
 default is \Macro{arabic}\PParameter{par}. \Macro{parformat} provides the
@@ -813,20 +805,20 @@ With automatic numbering, \Macro{parformat} is followed by
 \Macro{parformatseparation}, which currently consists of
 \Macro{nonbreakspace}, the non-breakable space.
 
-\BeginIndex{FontElement}{parnumber}\LabelFontElement{parnumber}%
+\BeginIndex{FontElement}{parnumber}\LabelFontElement{parnumber}%^^A
 The paragraph number is usually printed using the currently active font.
 However, you can change this default for the \FontElement{parnumber} element
-at any time with \DescRef{\LabelBase.cmd.setkomafont}%
+at any time with \DescRef{\LabelBase.cmd.setkomafont}%^^A
 \important[i]{\DescRef{\LabelBase.cmd.setkomafont},
   \DescRef{\LabelBase.cmd.addtokomafont}} and
 \DescRef{\LabelBase.cmd.addtokomafont} (see
-\autoref{sec:\LabelBase.textmarkup}%
-\SeeNote{, \DescPageRef{\LabelBase.cmd.setkomafont}}).%
-\EndIndex{FontElement}{parnumber}%
+\autoref{sec:\LabelBase.textmarkup}%^^A
+\SeeNote{, \DescPageRef{\LabelBase.cmd.setkomafont}}).%^^A
+\EndIndex{FontElement}{parnumber}%^^A
 
 Note\textnote{Attention!} that \pkg*{contract} assumes internally that
 \Macro{thepar} is an Arabic number. Therefore you should definitely not
-redefine it!%
+redefine it!%^^A
 \EndIndexGroup
 
 
@@ -837,12 +829,12 @@ If the paragraph number is not printed, \pkg*{contract} executes the
 \Macro{withoutparnumber} command at the beginning of the new paragraph. The
 initial definition of this command is empty. This means it is a kind of dummy
 command that does nothing. It has been implemented because of a user request.
-Most users can ignore this command.%
+Most users can ignore this command.%^^A
 \EndIndexGroup
 
 
 \begin{Declaration}
-  \Macro{ellipsispar}\OParameter{number}%
+  \Macro{ellipsispar}\OParameter{number}%^^A
   \Macro{parellipsis}
 \end{Declaration}
 Sometimes\,---\,particularly in comparative commentaries\,---\,it is desirable
@@ -883,17 +875,17 @@ the \PName{number} of omitted paragraphs into account.
 
 The ellipsis is by default \Macro{textellipsis}\IndexCmd{textellipsis}, if
 such a command is defined. If not, \Macro{dots} is used. You can redefine
-\Macro{parellipsis} at any time with \Macro{renewcommand}.%
+\Macro{parellipsis} at any time with \Macro{renewcommand}.%^^A
 \EndIndexGroup
-%
+%^^A
 \EndIndexGroup
 
 
 \subsection{Sentences}
 \seclabel{sentence}
 
-\BeginIndexGroup%
-\BeginIndex{}{sentence>number}%
+\BeginIndexGroup%^^A
+\BeginIndex{}{sentence>number}%^^A
 Paragraphs in contracts consist of one or more sentences, some of which may
 also be numbered. However, as automatic numbering is cumbersome and
 error-prone, it has not yet been implemented in
@@ -910,20 +902,20 @@ adds one to the \Counter{sentence} counter. By default,
 \Macro{sentencenumberformat} prints \Macro{thesentence} as an Arabic number in
 superscript.
 
-\BeginIndex{FontElement}{sentencenumber}\LabelFontElement{sentencenumber}%
+\BeginIndex{FontElement}{sentencenumber}\LabelFontElement{sentencenumber}%^^A
 The sentence number is usually printed using the currently active font.
 However, you can change this default for the \FontElement{parnumber} element
-at any time with \DescRef{\LabelBase.cmd.setkomafont}%
+at any time with \DescRef{\LabelBase.cmd.setkomafont}%^^A
 \important[i]{\DescRef{\LabelBase.cmd.setkomafont},
   \DescRef{\LabelBase.cmd.addtokomafont}} and
 \DescRef{\LabelBase.cmd.addtokomafont} (see
-\autoref{sec:\LabelBase.textmarkup}%
-\SeeNote{, \DescPageRef{\LabelBase.cmd.setkomafont}}).%
-\EndIndex{FontElement}{sentencenumber}%
+\autoref{sec:\LabelBase.textmarkup}%^^A
+\SeeNote{, \DescPageRef{\LabelBase.cmd.setkomafont}}).%^^A
+\EndIndex{FontElement}{sentencenumber}%^^A
 
 Using\textnote{Hint!} \pkg{babel}\IndexPackage{babel} offers an easy way
-to define a shorthand for \Macro{Sentence}:%
-\phantomsection\label{sec:\LabelBase.shorthandexample}%
+to define a shorthand for \Macro{Sentence}:%^^A
+\phantomsection\label{sec:\LabelBase.shorthandexample}%^^A
 \begin{lstcode}[moretexcs={useshorthands,defineshorthand}]
   \useshorthands{'}
   \defineshorthand{'S}{\Sentence\ignorespaces}
@@ -936,11 +928,11 @@ even use the dot as an abbreviation for a dot and a new sentence number:
 For details regarding \Macro{useshorthands} and \Macro{defineshorthand},
 please consult the manual of the \pkg{babel} package (see
 \cite{package:babel}). You can find an example of their application in
-\autoref{sec:\LabelBase.example}, \autopageref{sec:\LabelBase.example}.%
+\autoref{sec:\LabelBase.example}, \autopageref{sec:\LabelBase.example}.%^^A
 \EndIndexGroup
-%
+%^^A
 \EndIndexGroup
-%
+%^^A
 \EndIndexGroup
 
 
@@ -953,32 +945,32 @@ The conventional mechanism to set cross-references using
 Therefore \pkg*{contract} provides additional commands.
 
 \begin{Declaration}
-  \Macro{ref}\Parameter{label}%
-  \Macro{refL}\Parameter{label}%
-  \Macro{refS}\Parameter{label}%
+  \Macro{ref}\Parameter{label}%^^A
+  \Macro{refL}\Parameter{label}%^^A
+  \Macro{refS}\Parameter{label}%^^A
   \Macro{refN}\Parameter{label}
 \end{Declaration}
 The commands \Macro{refL}, \Macro{refS}, and \Macro{refN} give a full
 reference to clause, paragraph and sentence. \Macro{refL} is a long text,
 \Macro{refS} a short text, and \Macro{refN} an abbreviated, numeric form.
-\Macro{ref} defaults to \Macro{refL}.%
+\Macro{ref} defaults to \Macro{refL}.%^^A
 \EndIndexGroup
 
 
 \begin{Declaration}
-  \Macro{refClause}\Parameter{label}%
+  \Macro{refClause}\Parameter{label}%^^A
   \Macro{refClauseN}\Parameter{label}
 \end{Declaration}
 These commands reference a clause without displaying the paragraph or
 sentences. \Macro{refClause} puts a section mark (\S) in front of the
-reference, while \Macro{refClauseN} does not.%
+reference, while \Macro{refClauseN} does not.%^^A
 \EndIndexGroup
 
 
 \begin{Declaration}
-  \Macro{refPar}\Parameter{label}%
-  \Macro{refParL}\Parameter{label}%
-  \Macro{refParS}\Parameter{label}%
+  \Macro{refPar}\Parameter{label}%^^A
+  \Macro{refParL}\Parameter{label}%^^A
+  \Macro{refParS}\Parameter{label}%^^A
   \Macro{refParN}\OParameter{number format}\Parameter{label}
 \end{Declaration}
 You can reference just a paragraph with \Macro{refParL}, \Macro{refParS} and
@@ -989,20 +981,20 @@ worth noting is the optional argument of \Macro{refParN}. Usually the numeric
 reference to a paragraph uses a Roman number. You can, however, specify a
 different \PName{number format} in the optional argument. This option
 primarily makes sense to use Arabic numbers. By default, \Macro{refPar} is
-\Macro{refParL}.%
+\Macro{refParL}.%^^A
 \EndIndexGroup
 
 
 \begin{Declaration}
-  \Macro{refSentence}\Parameter{label}%
-  \Macro{refSentenceL}\Parameter{label}%
-  \Macro{refSentenceS}\Parameter{label}%
+  \Macro{refSentence}\Parameter{label}%^^A
+  \Macro{refSentenceL}\Parameter{label}%^^A
+  \Macro{refSentenceS}\Parameter{label}%^^A
   \Macro{refSentenceN}\Parameter{label}
 \end{Declaration}
 You can reference a sentence with \Macro{refSentenceL}, \Macro{refSentenceS},
 or \Macro{refSentenceN}. Again, there is a long text form, a short text form,
 and a numerical form. By default, \Macro{refSentence} is
-\Macro{refSentenceL}.%
+\Macro{refSentenceL}.%^^A
 \EndIndexGroup
 
 
@@ -1014,74 +1006,74 @@ and \DescRef{\LabelBase.cmd.refSentence} depend on the \PName{value} of the
 \Option{ref} option. The defaults are \DescRef{\LabelBase.cmd.refL},
 \DescRef{\LabelBase.cmd.refParL} and \DescRef{\LabelBase.cmd.refSentenceL}.
 You can find the available values and their meaning in
-\autoref{tab:\LabelBase.ref}.%
-%
+\autoref{tab:\LabelBase.ref}.%^^A
+%^^A
 \begin{table}
-  \captionabove[{%
+  \captionabove[{%^^A
     Available values for the \Option{ref} option to configure the
-    cross-reference format%
-  }]{%
+    cross-reference format%^^A
+  }]{%^^A
     Available values for the \Option{ref} option to configure the
     cross-reference format of \DescRef{\LabelBase.cmd.ref},
-    \DescRef{\LabelBase.cmd.refPar}, and \DescRef{\LabelBase.cmd.refSentence}%
-    \label{tab:\LabelBase.ref}%
-  }%
+    \DescRef{\LabelBase.cmd.refPar}, and \DescRef{\LabelBase.cmd.refSentence}%^^A
+    \label{tab:\LabelBase.ref}%^^A
+  }%^^A
   \begin{desctabular}
-    \entry{\PValue{long}}{%
-      A combination of \PValue{parlong} and \PValue{sentencelong}.%
-      \IndexOption{ref~=\textKValue{long}}%
-    }%
-    \entry{\PValue{numeric}}{%
-      A combination of \PValue{parnumeric} and \PValue{sentencenumeric}.%
-      \IndexOption{ref~=\textKValue{numeric}}%
-    }%
+    \entry{\PValue{long}}{%^^A
+      A combination of \PValue{parlong} and \PValue{sentencelong}.%^^A
+      \IndexOption{ref\quotechar=\textKValue{long}}%^^A
+    }%^^A
+    \entry{\PValue{numeric}}{%^^A
+      A combination of \PValue{parnumeric} and \PValue{sentencenumeric}.%^^A
+      \IndexOption{ref\quotechar=\textKValue{numeric}}%^^A
+    }%^^A
     \entry{\PValue{clauseonly}, \PValue{onlyclause}, \PValue{ClauseOnly},
-      \PValue{OnlyClause}}{%
+      \PValue{OnlyClause}}{%^^A
       A combination of \PValue{paroff} and \PValue{sentenceoff}. Note that
       \DescRef{\LabelBase.cmd.refPar} and \DescRef{\LabelBase.cmd.refSentence}
-      produce empty results!%
-      \IndexOption{ref~=\textKValue{long}}%
-    }%
-    \entry{\PValue{parlong}, \PValue{longpar}, \PValue{ParL}}{%
-      Paragraphs are referenced in long textual form.%
-      \IndexOption{ref~=\textKValue{parlong}}%
-    }%
-    \entry{\PValue{parnumeric}, \PValue{numericpar}, \PValue{ParN}}{%
-      Paragraphs are referenced in simple numerical form.%
-      \IndexOption{ref~=\textKValue{parnumeric}}%
-    }%
-    \entry{\PValue{paroff}, \PValue{nopar}}{%
+      produce empty results!%^^A
+      \IndexOption{ref\quotechar=\textKValue{long}}%^^A
+    }%^^A
+    \entry{\PValue{parlong}, \PValue{longpar}, \PValue{ParL}}{%^^A
+      Paragraphs are referenced in long textual form.%^^A
+      \IndexOption{ref\quotechar=\textKValue{parlong}}%^^A
+    }%^^A
+    \entry{\PValue{parnumeric}, \PValue{numericpar}, \PValue{ParN}}{%^^A
+      Paragraphs are referenced in simple numerical form.%^^A
+      \IndexOption{ref\quotechar=\textKValue{parnumeric}}%^^A
+    }%^^A
+    \entry{\PValue{paroff}, \PValue{nopar}}{%^^A
       Paragraphs have no reference. Note that \DescRef{\LabelBase.cmd.refPar}
-      produces an empty result!%
-      \IndexOption{ref~=\textKValue{paroff}}%
-    }%
-    \entry{\PValue{parshort}, \PValue{shortpar}, \PValue{ParS}}{%
-      Paragraphs are referenced in short textual form.%
-      \IndexOption{ref~=\textKValue{parshort}}%
-    }%
-    \entry{\PValue{sentencelong}, \PValue{longsentence}, \PValue{SentenceL}}{%
-      Sentences are referenced in long textual form.%
-      \IndexOption{ref~=\textKValue{parlong}}%
-    }%
+      produces an empty result!%^^A
+      \IndexOption{ref\quotechar=\textKValue{paroff}}%^^A
+    }%^^A
+    \entry{\PValue{parshort}, \PValue{shortpar}, \PValue{ParS}}{%^^A
+      Paragraphs are referenced in short textual form.%^^A
+      \IndexOption{ref\quotechar=\textKValue{parshort}}%^^A
+    }%^^A
+    \entry{\PValue{sentencelong}, \PValue{longsentence}, \PValue{SentenceL}}{%^^A
+      Sentences are referenced in long textual form.%^^A
+      \IndexOption{ref\quotechar=\textKValue{parlong}}%^^A
+    }%^^A
     \entry{\PValue{sentencenumeric}, \PValue{numericsentence},
-      \PValue{SentenceN}}{%
-      Sentences are referenced in simple numeric form.%
-      \IndexOption{ref~=\textKValue{sentencenumeric}}%
-    }%
-    \entry{\PValue{sentenceoff}, \PValue{nosentence}}{%
+      \PValue{SentenceN}}{%^^A
+      Sentences are referenced in simple numeric form.%^^A
+      \IndexOption{ref\quotechar=\textKValue{sentencenumeric}}%^^A
+    }%^^A
+    \entry{\PValue{sentenceoff}, \PValue{nosentence}}{%^^A
       Sentences have no reference. Note that
-      \DescRef{\LabelBase.cmd.refSentence} produces an empty result!%
-      \IndexOption{ref~=\textKValue{sentenceoff}}%
-    }%
+      \DescRef{\LabelBase.cmd.refSentence} produces an empty result!%^^A
+      \IndexOption{ref\quotechar=\textKValue{sentenceoff}}%^^A
+    }%^^A
     \entry{\PValue{sentenceshort}, \PValue{shortsentence},
-      \PValue{SentenceS}}{%
-      Sentences are referenced in short textual form.%
-      \IndexOption{ref~=\textKValue{sentenceshort}}%
-    }%
-    \entry{\PValue{short}}{%
-      A combination of \PValue{parshort} and \PValue{sentenceshort}.%
-      \IndexOption{ref~=\textKValue{value}}%
-    }%
+      \PValue{SentenceS}}{%^^A
+      Sentences are referenced in short textual form.%^^A
+      \IndexOption{ref\quotechar=\textKValue{sentenceshort}}%^^A
+    }%^^A
+    \entry{\PValue{short}}{%^^A
+      A combination of \PValue{parshort} and \PValue{sentenceshort}.%^^A
+      \IndexOption{ref\quotechar=\textKValue{value}}%^^A
+    }%^^A
 \end{desctabular}
 \end{table}
 
@@ -1089,7 +1081,7 @@ You can find the available values and their meaning in
   Suppose you always want to reference paragraphs in the form ``paragraph 1
   in clause 1''. As there is no predefined command for this, you have
   to create your own definition from the available options. You can achieve
-  this easily with:%
+  this easily with:%^^A
 \begin{lstcode}
   \newcommand*{\refParM}[1]{%
     paragraph~\refParN[arabic]{#1} 
@@ -1097,15 +1089,15 @@ You can find the available values and their meaning in
   }
 \end{lstcode}
   This new command can be used in the same way as
-  \DescRef{\LabelBase.cmd.refParL}.%
-\end{Example}%
+  \DescRef{\LabelBase.cmd.refParL}.%^^A
+\end{Example}%^^A
 
 You can find examples of results of the basic commands in
-\autoref{tab:\LabelBase.refexamples}.%
-%
+\autoref{tab:\LabelBase.refexamples}.%^^A
+%^^A
 \begin{table}
-  \KOMAoptions{captions=topbeside}%
-  \setcapindent{0pt}%
+  \KOMAoptions{captions=topbeside}%^^A
+  \setcapindent{0pt}%^^A
   \begin{captionbeside}{Example outputs of the \Option{ref}-independent 
     cross-reference commands}[l]
     \begin{tabular}[t]{ll}
@@ -1143,7 +1135,7 @@ perhaps something like ``Art.'' or ``IAS'', and so forth. An independent
 counter is also required for each of these different clause types.
 
 \begin{Declaration}
-  \Macro{DeclareNewJuraEnvironment}\Parameter{environment}\OParameter{options}%
+  \Macro{DeclareNewJuraEnvironment}\Parameter{environment}\OParameter{options}%^^A
   \Parameter{start commands}\Parameter{end commands}
 \end{Declaration}
 You can use this command to define new and independent environments for
@@ -1161,37 +1153,37 @@ is possible to set \PName{options} in a comma-separated list.  See
 
 \begin{desclist}
   \desccaption{Options provided by \Macro{DeclareNewJuraEnvironment} for new
-    contract environments\label{tab:\LabelBase.DeclareNewJuraEnvironment}}%
-  {Options of \Macro{DeclareNewJuraEnvironment} (\emph{continued})}%
-  \entry{\OptionVName{Clause}{command}}{%
+    contract environments\label{tab:\LabelBase.DeclareNewJuraEnvironment}}%^^A
+  {Options of \Macro{DeclareNewJuraEnvironment} (\emph{continued})}%^^A
+  \entry{\OptionVName{Clause}{command}}{%^^A
     Defines the \PName{command} to which the \DescRef{\LabelBase.cmd.Clause}
     command is mapped within the environment. This \PName{command}, like the
     one documented for \DescRef{\LabelBase.env.contract}, expects exactly one
     argument. To use it correctly requires advanced knowledge of the
     \pkg*{contract}'s internal functioning. Furthermore, the requirements for
     the \PName{command} may change in future versions. Therefore it is
-    recommended not to use this option!%
-  }%
-  \entry{\OptionVName{ClauseFont}{commands}}{%
-    \leavevmode\BeginIndex{FontElement}{\PName{environment}.Clause}%
-    \LabelFontElement{\PName{environment}.Clause}%
+    recommended not to use this option!%^^A
+  }%^^A
+  \entry{\OptionVName{ClauseFont}{commands}}{%^^A
+    \leavevmode\BeginIndex{FontElement}{\PName{environment}.Clause}%^^A
+    \LabelFontElement{\PName{environment}.Clause}%^^A
     If this option is used, a new
     \FontElement{\PName{environment}.Clause}\IndexFontElement{\PName{environment}.Clause}
     element is defined using
     \DescRef{maincls-experts.cmd.newkomafont}\IndexCmd{newkomafont}, with the
     \PName{commands} used as its default setting. If the element was
-    previously defined as an alias%
+    previously defined as an alias%^^A
     \SeeNote{ (see \DescRef{maincls-experts.cmd.aliaskomafont} in
       \autoref{sec:maincls-experts.fonts},
-      \DescPageRef{maincls-experts.cmd.aliaskomafont})}%
+      \DescPageRef{maincls-experts.cmd.aliaskomafont})}%^^A
     , it will become an independent element instead. If it has already been
     defined as an independent element, \DescRef{\LabelBase.cmd.setkomafont} is
     used to set the \PName{commands} a new font settings. Please note the
-    limitations for font settings in \autoref{sec:\LabelBase.textmarkup}%
+    limitations for font settings in \autoref{sec:\LabelBase.textmarkup}%^^A
     \SeeNote{, \DescPageRef{\LabelBase.cmd.setkomafont}}.
-    \EndIndex{FontElement}{\PName{environment}.Clause}%
-  }%
-  \entry{\OptionVName{SubClause}{command}}{%
+    \EndIndex{FontElement}{\PName{environment}.Clause}%^^A
+  }%^^A
+  \entry{\OptionVName{SubClause}{command}}{%^^A
     Defines the \PName{command} to which the
     \DescRef{\LabelBase.cmd.SubClause} command is mapped within the
     environment. This \PName{command}, like the one documented for
@@ -1199,23 +1191,23 @@ is possible to set \PName{options} in a comma-separated list.  See
     correctly requires advanced knowledge of the \pkg*{contract}'s internal
     functioning. Furthermore, the requirements for the \PName{command} may
     change in future versions. Therefore it is recommended not to use this
-    option!%
-  }%
-  \entry{\OptionVName{Sentence}{command}}{%
+    option!%^^A
+  }%^^A
+  \entry{\OptionVName{Sentence}{command}}{%^^A
     Defines the \PName{command} to which the \DescRef{\LabelBase.cmd.Sentence}
     is mapped within the environment. This \PName{command} must not have an
     argument. Typically it should add one to the
     \Counter{sentence}\IndexCounter{sentence} (using
     \Macro{refstepcounter}\IndexCmd{refstepcounter}) counter and display it
     appropriately. It is particularly important to avoid adding unwanted
-    spaces.%
-  }%
-  \entry{\OptionVName{ClauseNumberFormat}{command}}{%
+    spaces.%^^A
+  }%^^A
+  \entry{\OptionVName{ClauseNumberFormat}{command}}{%^^A
     Formats the numbers of clauses within the environment. The \PName{command}
     should expect exactly one argument: the number of the clause. If the
     \PName{command} implements a series of commands and the number is the last
     argument of a that series, you can directly use the series of commands as
-    \PName{command}.%
+    \PName{command}.%^^A
   }
 \end{desclist}
 \begin{Example}
@@ -1224,14 +1216,14 @@ is possible to set \PName{options} in a comma-separated list.  See
 \begin{lstcode}
   \DeclareNewJuraEnvironment{Article}[ClauseNumberFormat=Art.~]{}{}
 \end{lstcode}
-  If we are using a \KOMAScript{} class and want to separate the paragraphs in
+  If we are using a \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} class and want to separate the paragraphs in
   this environment with space instead of using paragraph indentation, we can
   use:
 \begin{lstcode}
   \DeclareNewJuraEnvironment{Article}[ClauseNumberFormat=Art.~]
                             {\KOMAoptions{parskip}}{}
 \end{lstcode}
-  In cross-references, ``Art.'' will  of course be used instead of ``\S''.%
+  In cross-references, ``Art.'' will  of course be used instead of ``\S''.%^^A
 
   The new environment is used like \DescRef{\LabelBase.env.contract}:
 \begin{lstcode}
@@ -1241,7 +1233,7 @@ is possible to set \PName{options} in a comma-separated list.  See
     duty of all state authority.
   \end{Article}
 \end{lstcode}
-\end{Example}%
+\end{Example}%^^A
 \EndIndexGroup
 
 
@@ -1253,20 +1245,20 @@ lawyer. Therefore it initially supported only the languages \PValue{german},
 \PValue{ngerman}, \PValue{austrian}, and \PValue{naustrian}. Nevertheless, it
 has been designed to support common language packages like
 \pkg{babel}\important{\pkg{babel}}\IndexPackage{babel}. Users can easily make
-changes by using \DescRef{scrbase.cmd.providecaptionname}%
+changes by using \DescRef{scrbase.cmd.providecaptionname}%^^A
 \SeeNote{ (see \autoref{sec:scrbase.languageSupport},
-  \DescPageRef{scrbase.cmd.providecaptionname})}%
+  \DescPageRef{scrbase.cmd.providecaptionname})}%^^A
 . If you have definitive information about the correct legal terms and
-conventions of a language, please contact the \KOMAScript{} author. Support
+conventions of a language, please contact the \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} author. Support
 for English has been added in this way, and so \pkg*{contract} now also
 provides terms for the languages \PValue{english}, \PValue{american},
 \PValue{british}, \PValue{canadian}, \PValue{USenglish}, and
 \PValue{UKenglish}.
 
 \begin{Declaration}
-  \Macro{parname}%
-  \Macro{parshortname}%
-  \Macro{sentencename}%
+  \Macro{parname}%^^A
+  \Macro{parshortname}%^^A
+  \Macro{sentencename}%^^A
   \Macro{sentenceshortname}
 \end{Declaration}
 These are the language-dependent terms used by \pkg*{contract}. The meaning
@@ -1275,17 +1267,17 @@ of the terms and their English defaults are shown in
 \DescRef{scrbase.cmd.providecaptionname} inside
 \Macro{begin}\PParameter{document} only if other requirements have not already
 been met. If you use \pkg*{contract} with an unsupported language, the
-package will throw an error.%
-%
+package will throw an error.%^^A
+%^^A
 \begin{table}
-  \KOMAoptions{captions=topbeside}%
-  \setcapindent{0pt}%
+  \KOMAoptions{captions=topbeside}%^^A
+  \setcapindent{0pt}%^^A
   \begin{captionbeside}
-    [{%
-      Meanings and English defaults of language-dependent terms%
-    }]{%
+    [{%^^A
+      Meanings and English defaults of language-dependent terms%^^A
+    }]{%^^A
       Meanings and English defaults of language-dependent terms, if not
-      already defined%
+      already defined%^^A
     } [l]
     \begin{tabular}[t]{lll}
       \toprule
@@ -1300,7 +1292,7 @@ package will throw an error.%
   \end{captionbeside}
   \label{tab:\LabelBase.captionnames}
 \end{table}
-%
+%^^A
 \EndIndexGroup
 
 
@@ -1312,41 +1304,41 @@ member wanted to remind the board about an overdue meeting that was prescribed
 by the club's by-laws. Such club by-laws are a kind of contract, and you can
 create them using \pkg*{contract}.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=1-2}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=1-2}]{contract-example-en.tex}%^^A
 We use class \Class{scrartcl}. Because paragraph distance instead of paragraph
 indentation is usual in club by-laws, we load the class with option
-\OptionValueRef{maincls}{parskip}{half}%
+\OptionValueRef{maincls}{parskip}{half}%^^A
 \SeeNote{ (see \autoref{sec:maincls.parmarkup},
-  \DescPageRef{maincls.option.parskip})}%
+  \DescPageRef{maincls.option.parskip})}%^^A
 .
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=4-4}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=4-4}]{contract-example-en.tex}%^^A
 The club rules are in British English. Therefore we load the \pkg{babel}
 package with the \Option{british} option too.
 
-\iffree{%
-\lstinputcode[{xleftmargin=2em,%
-  linerange={6-6,8-8}}]{contract-example-en.tex}%
-}{%
-\lstinputcode[{xleftmargin=2em,%
-  linerange={6-6,9-9}}]{contract-example-en.tex}%
-}%
+\iffree{%^^A
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange={6-6,8-8}}]{contract-example-en.tex}%^^A
+}{%^^A
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange={6-6,9-9}}]{contract-example-en.tex}%^^A
+}%^^A
 We make some default font settings. Earlier versions of the example also
 loaded the \pkg{textcomp} package here for an improved section mark
 (\S). Since \LaTeX{} 2020/02/01, however, the desired functionality is directly
 integrated in the \LaTeX{} kernel.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=11-11}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=11-11}]{contract-example-en.tex}%^^A
 Later in the document, we want lists numbered not with Arabic numbers but with
 lower-case letters. We can do this easily with the \pkg{enumerate}
 package. Alternatively, we could have used the \pkg{enumitem} package.
 
-\lstinputcode[{moretexcs={useshorthands,defineshorthand},%
-  xleftmargin=2em,%
-  linerange=13-21}]{contract-example-en.tex}%
+\lstinputcode[{moretexcs={useshorthands,defineshorthand},%^^A
+  xleftmargin=2em,%^^A
+  linerange=13-21}]{contract-example-en.tex}%^^A
 Now it is time for \pkg*{contract}. The
 \OptionValueRef{\LabelBase}{clausemark}{forceboth} option forces clauses to
 create left and right marks for the running head. On the other hand, we do not
@@ -1364,38 +1356,38 @@ The definition of shorthands has already been explained in
 \autoref{sec:\LabelBase.shorthandexample}. In this example we do the same thing
 to simplify the input.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=23-23}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=23-23}]{contract-example-en.tex}%^^A
 It is time to begin the actual document.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=25-29}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=25-29}]{contract-example-en.tex}%^^A
 Like other documents, the by-laws have a title. We created it with the usual
-\KOMAScript{} commands (see \autoref{sec:maincls.titlepage}, starting on
+\href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} commands (see \autoref{sec:maincls.titlepage}, starting on
 \autopageref{sec:maincls.titlepage}).
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=31-31}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=31-31}]{contract-example-en.tex}%^^A
 As already mentioned, we want to create a table of contents.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=33-37}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=33-37}]{contract-example-en.tex}%^^A
 Preambles are not unusual in club by-laws. Here we use
 \DescRef{maincls.cmd.addsec} to create one because we want it to have an entry
 in the table of contents.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=39-39}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=39-39}]{contract-example-en.tex}%^^A
 Here we use a small trick. The articles of the club by-laws should be numbered
 with upper-case letters instead of Arabic numbers, just as 
 the appendix sections of an article using \Class{scrartcl} are.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=41-43}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=41-43}]{contract-example-en.tex}%^^A
 We begin the contract with the first article.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=44-54}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=44-54}]{contract-example-en.tex}%^^A
 The first clause has a number and a title. We will do the same with all
 following clauses.
 
@@ -1410,21 +1402,21 @@ In the second paragraph we have two sentences. Here we can see the shorthands
 sentence number. The second one generates not only the full stop but also the
 sentence number. With this, both sentences are numbered.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=55-70}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=55-70}]{contract-example-en.tex}%^^A
 The second clause: again this contains several paragraphs, some of which
 include several sentences. The second paragraph also has a numbered list. In
 the last paragraph, we set a label, because we want to reference it later.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=72-78}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=72-78}]{contract-example-en.tex}%^^A
 The third clause contains something special: a cross-reference. Here we use
 the long form with clause, paragraph, and sentence. If we decided later that
 sentences should not be included in the reference, we could use the
 \OptionValueRef{\LabelBase}{ref}{nosentence} option to set this globally.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=80-81}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=80-81}]{contract-example-en.tex}%^^A
 Here we have a special kind of clause. In earlier versions of the club by-laws,
 this was a real clause, but it was later removed. However, the
 numbering of the following clauses should not be changed by removing this
@@ -1432,79 +1424,79 @@ one. Therefore the \DescRef{\LabelBase.cmd.Clause} statement has not been
 removed but supplemented by option \Option{dummy}. With this, we also can set
 a label even though the clause will not be printed.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=82-86}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=82-86}]{contract-example-en.tex}%^^A
 Another article begins. To avoid problems with the paragraph numbering, we
 interrupt the \DescRef{\LabelBase.env.contract} environment.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=87-87}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=87-87}]{contract-example-en.tex}%^^A
 The first clause of the next article also has been deleted.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=89-98}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=89-98}]{contract-example-en.tex}%^^A
 Here we have a real clause again. We cross-reference one of the deleted
 clauses and also set a label.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=100-104}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=100-104}]{contract-example-en.tex}%^^A
 Once more, this is a special kind of clause. This time we have not removed a
 clause but added one without renumbering the following clauses. To do so,
 we use \DescRef{\LabelBase.cmd.SubClause}. Therefore the clause number is the
 same like the previous one but with an appended ``a''.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=106-126}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=106-126}]{contract-example-en.tex}%^^A
 The other clauses of this article are very usual. You already know all the
 features used for them.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=128-141}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=128-141}]{contract-example-en.tex}%^^A
 There follows another article no special features.
 
-\lstinputcode[{xleftmargin=2em,%
-  linerange=143-143}]{contract-example-en.tex}%
+\lstinputcode[{xleftmargin=2em,%^^A
+  linerange=143-143}]{contract-example-en.tex}%^^A
 Then the \LaTeX{} document ends. You can see first three pages in
-\autoref{fig:\LabelBase.example}.%
-%
+\autoref{fig:\LabelBase.example}.%^^A
+%^^A
 \begin{figure}
-  \setcapindent{0pt}%
-  \iffree{%
+  \setcapindent{0pt}%^^A
+  \iffree{%^^A
     {\hfill
-      \frame{\includegraphics[page=1,width=.482\textwidth,%
+      \frame{\includegraphics[page=1,width=.482\textwidth,%^^A
         height=.49\textheight,keepaspectratio]{contract-example-en}}\enskip
-      \frame{\includegraphics[page=2,width=.482\textwidth,%
+      \frame{\includegraphics[page=2,width=.482\textwidth,%^^A
         height=.49\textheight,keepaspectratio]{contract-example-en}}\par
       \smallskip}
-    \begin{captionbeside}[{%
+    \begin{captionbeside}[{%^^A
         Example: First three pages of the example club by-laws of
-        \protect\autoref{sec:\LabelBase.example}%
-      }]{%
+        \protect\autoref{sec:\LabelBase.example}%^^A
+      }]{%^^A
         First three pages of the example club by-laws of
-        \protect\autoref{sec:\LabelBase.example}%
-      }%
+        \protect\autoref{sec:\LabelBase.example}%^^A
+      }%^^A
       [l]
-      \frame{\includegraphics[page=3,width=.482\textwidth,%
+      \frame{\includegraphics[page=3,width=.482\textwidth,%^^A
         height=.49\textheight,keepaspectratio]{contract-example-en}}\enskip
     \end{captionbeside}
-  }{%
+  }{%^^A
     {\hfill
-      \frame{\includegraphics[page=1,width=.482\textwidth]{contract-example-en}}%
+      \frame{\includegraphics[page=1,width=.482\textwidth]{contract-example-en}}%^^A
       \enskip
       \frame{\includegraphics[page=2,width=.482\textwidth]{contract-example-en}}\par
       \smallskip}
-    \begin{captionbeside}[{%
+    \begin{captionbeside}[{%^^A
         Example: First three pages of the example club by-laws of
-        \protect\autoref{sec:\LabelBase.example}%
-      }]{%
+        \protect\autoref{sec:\LabelBase.example}%^^A
+      }]{%^^A
         First three pages of the example club by-laws of
-        \protect\autoref{sec:\LabelBase.example}%
-      }%
+        \protect\autoref{sec:\LabelBase.example}%^^A
+      }%^^A
       [l]
-      \frame{\includegraphics[page=3,width=.482\textwidth]{contract-example-en}}%
+      \frame{\includegraphics[page=3,width=.482\textwidth]{contract-example-en}}%^^A
       \enskip
     \end{captionbeside}
-  }%
+  }%^^A
   \label{fig:\LabelBase.example}
 \end{figure}
 
@@ -1518,7 +1510,7 @@ Nevertheless, you should note that so far, the interaction of the
 possible with other \LaTeX{} environments, packages, or classes has not been
 tested. The main reason for this is that \pkg*{contract} is very specialised
 and far beyond the author's ordinary practice. So the author mostly relies on
-detailed user feedback.%
+detailed user feedback.%^^A
 \EndIndexGroup
 
 %
@@ -1580,8 +1572,8 @@ detailed user feedback.%
 % \pkg{tocbasic}, which is loaded later. But loading it on its own, we can
 % require a minimum version.
 % \begin{description}
-% \item[Todo:] Package \pkg*{contract} is no longer a \KOMAScript{}
-%   package. So it should not use the internal \KOMAScript{} package
+% \item[Todo:] Package \pkg*{contract} is no longer a \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript}
+%   package. So it should not use the internal \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} package
 %   \pkg{scrkbase}. For keys of contract environments we can just load
 %   \pkg{scrbase}. For package options we should either also switch to
 %   \pkg{scrbase} or use native key-value options of \LaTeX.
@@ -1604,7 +1596,7 @@ detailed user feedback.%
 % \begin{option}{contract}
 % \begin{macro}{\if@documentcontract,
 %               \@documentcontractfalse,\@documentcontracttrue}
-% \changes{scrjura-v3.36}{2022/01/25}{switched to a \KOMAScript{} option}
+% \changes{scrjura-v3.36}{2022/01/25}{switched to a \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} option}
 % Option \opt{contract} can be used to make the whole document to be a
 % contract. But in this case you are not allowed to reuse the \env{contract}
 % environment in the document. Nor is it allowed to stop or restart the
@@ -1782,7 +1774,7 @@ detailed user feedback.%
 % \changes{scrjura-v3.39}{2022/11/16}{only with \KOMAScript~3}
 % \begin{description}
 % \item[Todo:] Remove deprecated options, because they need an internal
-%   \KOMAScript{} macro.
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} macro.
 % \end{description}
 % \begin{command}{\Clausemark}
 % \changes{scrjura-v0.5e}{2011/08/31}{support for \cs{MakeMarkcase}}
@@ -1877,7 +1869,7 @@ detailed user feedback.%
 % long a short and a numeric form.
 % \begin{description}
 % \item[Todo:] Remove deprecated options, because they need an internal
-%   \KOMAScript{} macro.
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} macro.
 % \end{description}
 % \begin{macro}{\parcite@format,\sentencecite@format}
 % Default is the long form. Corresponding values of the two helper macros are:
