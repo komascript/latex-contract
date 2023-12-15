@@ -79,6 +79,7 @@
 \usepackage{graphicx}
 \usepackage[colorize]{scrguide-listings}
 \usepackage{scrguide-doclink}
+\usepackage{scrguide-index}
 \usepackage{scrguide-oldemu}
 \usepackage{booktabs}
 \usepackage{csquotes}
@@ -115,7 +116,6 @@
 \end{filecontents}
 \addbibresource{\jobname.bib}
 \setcounter{StandardModuleDepth}{2}
-\newcommand*{\Index}{\index}
 \newcommand*{\LabelBase}{contract}
 \newcommand*{\seclabel}[1]{\label{sec:\LabelBase.#1}}
 \newcommand*{\BeginIndexGroup}{}
@@ -318,11 +318,11 @@ Das Paket \pkg*{contract} ist eine Abspaltung von \KOMAScript. Es wurde von
 %\fi
 If you want to write a contract\Index{contract}, the articles of association
 for a company or an association, a law, or a legal commentary, the package
-\pkg*{contract} will provide typographical support. Although
-\pkg*{contract} is intended to provide general help for legal documents, the
-contract is the central element of the package. Particular attention is paid
-to clauses, titles, and numbered provisions\,---\,if there are several of
-them in a clause\,---, numbered sentences, entries in the table of
+\pkg*{contract} will provide typographical support. Although \pkg*{contract}
+is intended to provide general help for legal documents, the contract is the
+central element of the package. Particular attention is paid to
+clauses\Index{clause}, titles, and numbered provisions\,---\,if there are
+several of them in a clause\,---, numbered sentences, entries in the table of
 contents, and cross references according to German standards.
 
 The package has been developed in cooperation with Dr Alexander Willand of
@@ -381,7 +381,7 @@ Heiner Richter of the Hochschule Stralsund University of Applied Sciences.
 %   Alias for \fnt{\meta{environment}.Clause} within any contract environment,
 %   for example \fnt{contract.Clause} within environment \env{contract}. If no
 %   corresponding element is defined, \fnt{contract.Clause} is used.
-% \item[{\fnt{contract.Clause}\SpecialMainKOMAfontIndex{contract.Clause}:}]
+% \item[{\fnt{contract.Clause}\DescribeKOMAfont[noprint]{contract.Clause}:}]
 %   \hfill\mbox{(Default: \cs{sffamily}\cs{bfseries}\cs{large})}\\
 %   The heading of a \cs{Clause} within the environment \env{contract}.
 % \item[{\fnt{\meta{environment}.Clause}^^A
@@ -477,7 +477,7 @@ with the \PName{style} \PValue{default} and option
 \BeginIndexGroup
 \BeginIndex{}{contract}
 The essential mechanisms of \pkg*{contract} are available only inside the
-contract environment.
+contract environments.
 
 % \DescribeEnv{contract}
 \begin{Declaration}
@@ -501,8 +501,8 @@ environment within a clause.%
 \begin{Declaration}
   \Option{contract}
 \end{Declaration}
-The whole document becomes a contract if you use this option while loading the
-package with \DescRef{\LabelBase.cmd.usepackage}%^^A
+The whole document becomes a contract\Index{contract} if you use this option
+while loading the package with \DescRef{\LabelBase.cmd.usepackage}%^^A
 \important{\DescRef{\LabelBase.cmd.usepackage}} or as a global option with
 \DescRef{\LabelBase.cmd.documentclass}%^^A
 \important{\DescRef{\LabelBase.cmd.documentclass}}. The document then behaves
@@ -518,9 +518,9 @@ directly.%^^A
 
 \subsection{Clauses}
 \seclabel{clause}
-%\iffalse
-\index{section|seealso{clause}}
-%\fi
+\Index[see{clause}]{section}
+\Index[see{clause}]{paragraph}
+\Index[indexmain]{clause}
 
 Clauses\footnote{%^^A
   In English, a ``clause'' in a legal document is a section, paragraph, or
@@ -529,11 +529,11 @@ Clauses\footnote{%^^A
   ``clause'', we use the latter term throughout to avoid confusion with the
   \Class{article} class and the \DescRef{maincls.cmd.section} and
   \DescRef{maincls.cmd.paragraph} sectioning divisions of most document
-  classes.} in a legal sense are defined in package \pkg*{contract} only within
-contracts, that is inside the \DescRef{\LabelBase.env.contract} environment or
-other environments declared with
-\DescRef{\LabelBase.cmd.DeclareNewJuraEnvironment}\nobreak
-\SeeNote{ (see \autoref{sec:\LabelBase.newenv},
+  classes.} in a legal sense are defined in package \pkg*{contract} only
+within contracts\Index{contract}, that is inside the
+\DescRef{\LabelBase.env.contract} environment or other environments declared
+with \DescRef{\LabelBase.cmd.DeclareNewJuraEnvironment}\nobreak \SeeNote{ (see
+  \autoref{sec:\LabelBase.newenv},
   \DescPageRef{\LabelBase.cmd.DeclareNewJuraEnvironment})}.
 
 % \DescribeCommand{\Clause}
