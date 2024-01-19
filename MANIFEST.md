@@ -31,7 +31,7 @@ These files are typeset using LaTeX to produce the PDF documentation for the pac
 Plain text files included as documentation or metadata.
 
 * LICENSE.md ‡
-* MANIFEST.md 
+* MANIFEST.md ‡
 * README.md ‡
 
 ### Derived files
@@ -73,6 +73,7 @@ All files included in the `contract/tex` directory.
 All files included in the `contract/doc` directory.
 
 * LICENSE.md 
+* MANIFEST.md 
 * README.md 
 * contract-example-de.pdf 
 * contract-example-de.tex 
@@ -88,6 +89,7 @@ The following group lists the files included in the CTAN package.
 ### CTAN files
 
 * LICENSE.md 
+* MANIFEST.md 
 * README.md 
 * contract-example-de.pdf 
 * contract-example-de.tex 
