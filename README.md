@@ -22,9 +22,10 @@ The development has just begun …
 - [ ] [creating the first
       release](https://github.com/komascript/latex-contract/milestone/1)
 - [ ] removing `scrjura` from KOMA-Script
-- [ ] reimplementing several internals of `contract` using `expl3`, the new
-      paragraph hooks of LaTeX, and the extended referencing mechanism of
-      LaTeX
+- [ ] reimplementing several internals of `contract` using
+  - [ ] `expl3`, 
+  - [ ] the new paragraph hooks of LaTeX,
+  - [ ] the extended referencing mechanism of LaTeX.
 - [ ] [creating a new release of the new
       package](https://github.com/komascript/latex-contract/milestone/2)
 
