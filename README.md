@@ -13,6 +13,7 @@ The development has just begun …
 - [ ] creating a new build environment:
   - [ ] `README.md`
   - [x] `LICENSE.md`
+  - [x] `MANIFEST.md`
   - [x] `build.lua`
   - [ ] test files
 - [x] renaming several internals of `contract`
