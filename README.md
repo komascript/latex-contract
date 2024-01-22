@@ -19,7 +19,7 @@ The development has just begun …
 - [x] renaming several internals of `contract`
 - [x] adding user documentation based on the `scrjura` chapters of the English
       KOMA-Script manual
-- [ ] improving user documentation
+- [x] improving user documentation
 - [ ] [creating the first
       release](https://github.com/komascript/latex-contract/milestone/1)
 - [ ] removing `scrjura` from KOMA-Script
