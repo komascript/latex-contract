@@ -193,6 +193,8 @@
 \end{filecontents}
 \addbibresource{\jobname.bib}
 \setcounter{StandardModuleDepth}{2}
+\setcounter{IndexColumns}{2}
+\setcounter{GlossaryColumns}{2}
 \providecommand*\targ[1]{\texttt{\char`\{#1\char`\}}}
 \providecommand*\toarg[1]{\texttt{[#1]}}
 \newenvironment{syntax}{%
@@ -363,6 +365,8 @@
 % \end{abstract}
 %
 % \tableofcontents
+% \listoftables
+% \listoffigures
 %
 % \addpart{User Manual}
 %
@@ -443,7 +447,7 @@
 %   \hfill\mbox{(Default: \emph{none})}\\
 %   The heading of a \cs{Clause} within environment \meta{environment}, which
 %   has been defined using \cs{DeclareNewJuraEnvironment}, if the font has
-%   been setup using option \opt{ClauseFont} or the element has been defined
+%   been setup using property |ClauseFont| or the element has been defined
 %   explicitly.
 % \item[{\fnt{parnumber}:}]
 %   \hfill\mbox{(Default: \emph{empty})}\\
@@ -496,9 +500,17 @@
 % \meta{integer} instead of \len{maxdimen} or 2 as level number.
 %
 % Internally usage of this option results in a call of
-% \cs{DeclareTOCStyleEntry} with the \meta{style} |default| and a
-% corresponding value of \opt{level} in the \meta{option list}.
-%
+% \begin{syntax}
+%   \cs{DeclareTOCStyleEntry}\toarg{level=\meta{integer}}\targ{default}\targ{cpar}
+% \end{syntax}
+% respectively
+% \begin{syntax}
+%   \cs{DeclareTOCStyleEntry}\toarg{level=2}\targ{default}\targ{cpar}
+% \end{syntax}
+% respectively
+% \begin{syntax}
+%   \cs{DeclareTOCStyleEntry}\toarg{level=\cs{maxdimen}}\targ{default}\targ{cpar}\quad.
+% \end{syntax}
 %
 % \DescribeOption[noindex]{juratocindent}
 % \SpecialOptionIndex{juratocindent\quotechar=\meta{length}}
@@ -508,10 +520,14 @@
 % the table of contents. Any valid \meta{length} can be assigned. The defaults
 % are the same as for subsection entries in \cls{scrartcl}.
 %
-% Internally usage of these options results in calls of
-% \cs{DeclareTOCStyleEntry} with the \meta{style} |default| and option
-% \opt[element=indent]{indent=\meta{length}} respectively
-% \opt[element=numwidth]{numwidth=\meta{length}}.
+% Internally, usage of these options results in calls to:
+% \begin{syntax}
+%   \cs{DeclareTOCStyleEntry}\toarg{indent=\meta{length}}\targ{default}\targ{cpar}
+% \end{syntax}
+% respective
+% \begin{syntax}
+%   \cs{DeclareTOCStyleEntry}\toarg{numwidth=\meta{length}}\targ{default}\targ{cpar}\quad.
+% \end{syntax}
 %
 % \section{Environment for Contracts}
 % \label{sec:contract}
@@ -567,19 +583,21 @@
 %
 % \DescribeCommand{\Clause}
 % \DescribeCommand{\SubClause}
-% Each clause starts either with \cs{Clause}\oarg{options} or
-% \cs{SubClause}\oarg{options}.  The optional argument \meta{options} is a
-% comma separated list of options.  These are the most important commands
-% inside of a contract. Without using any additional \meta{options},
-% \cs{Clause} creates the heading of a clause, which consists of the sign
-% ``\S'', followed by its number. In contrast, \cs{SubClause} creates the
-% heading of a clause with the last number used by \cs{Clause} and adds a
-% lower-case letter. \cs{SubClause} is mainly intended for cases where an act
-% or a contract is amended and not only are clauses changed or deleted but new
-% clauses are inserted between existing ones without completely changing the
-% numbering.
+% Each clause starts either with \cs{Clause}\oarg{property list} or
+% \cs{SubClause}\oarg{property list}.  The optional argument \meta{property
+% list} is a comma separated list of \meta{key}|=|\meta{value}.
 %
-% Both commands accept a a comma-separated list of \meta{options}. An overview
+% These are the most important commands inside of a contract. Without using
+% any additional \meta{key}, \cs{Clause} creates the heading of a clause,
+% which consists of the sign ``\S'', followed by its number. In contrast,
+% \cs{SubClause} creates the heading of a clause with the last number used by
+% \cs{Clause} and adds a lower-case letter. \cs{SubClause} is mainly intended
+% for cases where an act or a contract is amended and not only are clauses
+% changed or deleted but new clauses are inserted between existing ones
+% without completely changing the numbering.
+%
+% Both commands accept a comma-separated list of \meta{key}|=|\meta{value}
+% properties and also some \meta{key}s without value. An overview
 % of the available properties is shown in \autoref{tab:Clause.options}.
 % The most important of them will be discussed in more detail.
 %
@@ -593,8 +611,8 @@
 %       numbering.%^^A
 %     }%^^A
 %     \entry{|head=|\meta{running head}}{%^^A
-%       If running heads are active, this \meta{running head} is used instead of
-%       the clause \meta{title}.%^^A
+%       If running heads are active, this \meta{running head} is used instead
+%       of the clause \meta{title}.%^^A
 %     }%^^A
 %     \entry{|nohead|}{%^^A
 %       The running head stays unchanged.%^^A
@@ -643,12 +661,12 @@
 % \cs{sffamily}\cs{bfseries}\cs{large}. See \autoref{sec:textmarkup} for
 % information about how to change the font for element \fnt{contract.Clause}.
 %
-% With the |title|, |head|, and |tocentry| property, you can title
-% a clause in addition to the number. You should put the value of each
-% property inside curly brackets. Otherwise, for example, commas which are
-% meant to be part of the value will be confused with the delimiters between
-% different properties of the \opt{options}. Empty values for |head| and
-% |tocentry| cause empty entries. If you want to avoid an entry, use the
+% With the |title|, |head|, and |tocentry| property, you can title a clause in
+% addition to the number. You should enclose the \meta{value} of each property
+% inside curly brackets. Otherwise, for example, commas which are meant to be
+% part of the \meta{value} will be confused with the delimiters between
+% different properties of the \meta{property list}. Empty values for |head|
+% and |tocentry| cause empty entries. If you want to avoid an entry, use the
 % |nohead| resp. |notocentry| property.
 %
 % Instead of consecutive numbers, you can also set a clause number manually
@@ -657,8 +675,8 @@
 % inside |number| have to be protected with \cs{protect}. You should use
 % only numbers and letters as a |number|.
 %
-% With the |dummy| property, you can suppress the output of the whole
-% heading of a clause. The automatic numbering, however, will still count this
+% With the |dummy| property, you can suppress the output of the whole heading
+% of a clause. The automatic numbering, however, will still count this
 % clause. In this way, you can skip an automatically numbered clause with
 %\begin{syntax}
 %  \cs{Clause}\toarg{dummy}
@@ -666,9 +684,9 @@
 % in case the clause corresponding clause has been deleted in a later version
 % of a contract.
 %
-% Note that the |dummy| property only accepts the values |true| and
-% |false|. All other values are usually ignored, but can lead to an error
-% message in the worst case scenario.
+% Note that the |dummy| property only accepts the \meta{value}s |true| and
+% |false|. All other \meta{value}s are usually ignored, but can lead to an
+% error message in the worst case scenario.
 %
 % \DescribeCommand{\Clauseformat}
 % As already mentioned, clauses and subclauses are normally numbered. The
@@ -696,9 +714,9 @@
 %
 % \DescribeOption[noindex]{clausemark}
 % \SpecialOptionIndex{clausemark\quotechar=\meta{value}}
-% Since clauses are a subordinate structure with independent numbering, they do
-% not produce running heads by default. You can, however, create running heads
-% with various settings using:
+% Since clauses are a subordinate structure with independent numbering, they
+% do not produce running heads by default. You can, however, create running
+% heads with various settings using:
 % \begin{syntax}
 %   \opt{clausemark}=\meta{value}
 % \end{syntax}
@@ -712,8 +730,8 @@
 %   \label{tab:clausemark}%^^A
 %   \begin{desctabular}
 %     \entry{\optvalue{both}}{%^^A
-%       Clauses generate left and right marks for running heads, if the document
-%       provides automatic running heads.%^^A
+%       Clauses generate left and right marks for running heads, if the
+%       document provides automatic running heads.%^^A
 %       \SpecialOptionIndex{clausemark\quotechar=both}%^^A
 %     }%^^A
 %     \entry{\optvalue{false}, \optvalue{off}, \optvalue{no}}{%^^A
@@ -723,8 +741,8 @@
 %     }%^^A
 %     \entry{\optvalue{forceboth}}{%^^A
 %       Clauses use \cs{markboth} to generate left and right
-%       marks for running heads even if the document does not provide automatic
-%       running heads for the current page style.%^^A
+%       marks for running heads even if the document does not provide
+%       automatic running heads for the current page style.%^^A
 %       \SpecialOptionIndex{clausemark\quotechar=forceboth}%^^A
 %     }%^^A
 %     \entry{\optvalue{forceright}}{%^^A
@@ -734,8 +752,8 @@
 %       \SpecialOptionIndex{clausemark\quotechar=forceright}%^^A
 %     }%^^A
 %     \entry{\optvalue{right}}{%^^A
-%       Clauses generate right marks for running heads, if the document provides
-%       automatic running heads.%^^A
+%       Clauses generate right marks for running heads, if the document
+%       provides automatic running heads.%^^A
 %       \SpecialOptionIndex{clausemark\quotechar=right}%^^A
 %     }%^^A
 %   \end{desctabular}
@@ -829,8 +847,8 @@
 %
 % \DescribeCommand{\ellipsispar}
 % \DescribeCommand{\parellipsis}
-% Sometimes\,---\,particularly in comparative commentaries\,---\,it is desirable
-% to omit paragraphs but to mark the omission. Those omitted
+% Sometimes\,---\,particularly in comparative commentaries\,---\,it is
+% desirable to omit paragraphs but to mark the omission. Those omitted
 % paragraphs\Index{paragraph>omission} should be taken into account by the
 % paragraph counter. The package \pkg*{contract} provides the command
 % \cs{ellipsispar} to do this.
@@ -846,10 +864,10 @@
 % \meta{number} of omitted paragraphs into account.
 % \begin{Example}
 %   Suppose you are writing a comment on the German\footnote{Please remember,
-%     this translation does not refer to an existing law but is only an example
-%     of how you might realise such a commentary with \pkg*{contract}.} penal
-%   code, but only on paragraph 3 of \S~2. Nevertheless, you'd like to indicate
-%   the omission indirectly. You can do this with:
+%   this translation does not refer to an existing law but is only an example
+%   of how you might realise such a commentary with \pkg*{contract}.} penal
+%   code, but only on paragraph 3 of \S~2. Nevertheless, you'd like to
+%   indicate the omission indirectly. You can do this with:
 %\begin{lstcode}[gobble=1]
 %  \documentclass[parskip=half]{scrartcl}
 %  \usepackage{contract}
@@ -903,8 +921,8 @@
 %  \useshorthands{'}
 %  \defineshorthand{'S}{\Sentence\ignorespaces}
 %\end{lstcode}
-% With this definition, any space after \lstinline|'S| will be ignored. You can
-% even use the dot as an abbreviation for a dot and a new sentence number:
+% With this definition, any space after \lstinline|'S| will be ignored. You
+% can even use the dot as an abbreviation for a dot and a new sentence number:
 %\begin{lstcode}[moretexcs={useshorthands,defineshorthand},gobble=1]
 %  \defineshorthand{'.}{. \Sentence\ignorespaces}
 %\end{lstcode}
@@ -1073,8 +1091,8 @@
 %
 % \begin{Example}
 %   Suppose you always want to reference paragraphs in the form ``paragraph 1
-%   in clause 1''. As there is no predefined command for this, you have
-%   to create your own definition from the available options. You can achieve
+%   in clause 1''. As there is no predefined command for this, you have to
+%   create your own definition from the available options. You can achieve
 %   this easily with:%^^A
 %\begin{lstcode}[gobble=1]
 %  \newcommand*{\refParM}[1]{%
@@ -1086,7 +1104,8 @@
 %   \cs{refParL}.%^^A
 % \end{Example}%^^A
 %
-% You can find examples of results of the basic commands in
+% You can find examples of results of the basic commands\,---\,this means the
+% commands, that are independent from option \opt{ref}\,---\,in
 % \autoref{tab:refexamples}.%^^A
 % %^^A
 % \begin{table}
@@ -1130,37 +1149,37 @@
 % \DescribeCommand{\DeclareNewJuraEnvironment}
 % You can use:
 % \begin{syntax}
-%   \cs{DeclareNewJuraEnvironment}\marg{environment}\oarg{options}%^^A
+%   \cs{DeclareNewJuraEnvironment}\marg{environment}\oarg{property list}\\%^^A
 %   \marg{start commands}\marg{end commands}
 % \end{syntax}
-% to define new and independent environments for
-% contracts or other legal texts. The argument \meta{environment} is the name
-% of the new environment, of course. The \meta{start commands} are commands
-% which will be executed at the beginning of the environment, as if they were
-% added directly after \cs{begin}\marg{environment}. Correspondingly
-% \meta{end commands} will be executed at the end of the environment, as if
-% added directly before \cs{end}\marg{environment}. Without any
-% \meta{options} the new environment behaves like the
-% \env{contract} environment, but with its own counters. It
-% is possible to set \meta{options} in a comma-separated list.  See
+% to define new and independent environments for contracts or other legal
+% texts. The argument \meta{environment} is the name of the new environment,
+% of course. The \meta{start commands} are commands which will be executed at
+% the beginning of the environment, as if they were added directly after
+% \cs{begin}\marg{environment}. Correspondingly \meta{end commands} will be
+% executed at the end of the environment, as if added directly before
+% \cs{end}\marg{environment}. Without a \meta{property list} the new
+% environment behaves like the \env{contract} environment, but with its own
+% counters. You can use several \meta{key}|=|\meta{value} properties as a
+% comma-separated \meta{property list}.  See
 % \autoref{tab:DeclareNewJuraEnvironment} for the currently supported
 % \meta{options}.
 %
 % \begin{table}
-%   \captionabove{Options provided by \cs{DeclareNewJuraEnvironment} for new
-%     contract environments}\label{tab:DeclareNewJuraEnvironment}%^^A
+%   \captionabove{Properties provided by \cs{DeclareNewJuraEnvironment} for
+%     new contract environments}\label{tab:DeclareNewJuraEnvironment}%^^A
 %   \begin{desctabular}
-%   \entry{\opt{Clause}|=|\meta{command}}{%^^A
+%   \entry{|Clause=|\meta{command}}{%^^A
 %     Defines the \meta{command} to which the \cs{Clause}
 %     command is mapped within the environment. This \meta{command}, like the
 %     one documented for \env{contract}, expects exactly one
 %     argument. To use it correctly requires advanced knowledge of the
-%     \pkg*{contract}'s internal functioning. Furthermore, the requirements for
-%     the \meta{command} may change in future versions. Therefore it is
+%     \pkg*{contract}'s internal functioning. Furthermore, the requirements
+%     for the \meta{command} may change in future versions. Therefore it is
 %     recommended not to use this option!%^^A
 %   }%^^A
-%   \entry{\opt{ClauseFont}|=|\meta{commands}}{%^^A
-%     If this option is used, a new \fnt{\meta{environment}.Clause}
+%   \entry{|ClauseFont=|\meta{commands}}{%^^A
+%     If this property is used, a new \fnt{\meta{environment}.Clause}
 %     element is defined with the
 %     \meta{commands} used as its default setting. If the element was
 %     previously defined as an alias, it will become an independent element
@@ -1168,7 +1187,7 @@
 %     \meta{commands} are used as new font settings. Please note the
 %     limitations for font settings in \autoref{sec:textmarkup}.%^^A
 %   }%^^A
-%   \entry{\opt{SubClause}|=|\meta{command}}{%^^A
+%   \entry{|SubClause=|\meta{command}}{%^^A
 %     Defines the \meta{command} to which the
 %     \cs{SubClause} command is mapped within the
 %     environment. This \meta{command}, like the one documented for
@@ -1176,9 +1195,9 @@
 %     correctly requires advanced knowledge of the \pkg*{contract}'s internal
 %     functioning. Furthermore, the requirements for the \meta{command} may
 %     change in future versions. Therefore it is recommended not to use this
-%     option!%^^A
+%     property!%^^A
 %   }%^^A
-%   \entry{\opt{Sentence}|=|\meta{command}}{%^^A
+%   \entry{|Sentence=|\meta{command}}{%^^A
 %     Defines the \meta{command} to which the \cs{Sentence}
 %     is mapped within the environment. This \meta{command} must not have an
 %     argument. Typically it should add one to the
@@ -1186,12 +1205,12 @@
 %     appropriately. It is particularly important to avoid adding unwanted
 %     spaces.%^^A
 %   }%^^A
-%   \entry{\opt{ClauseNumberFormat}|=|\meta{command}}{%^^A
-%     Formats the numbers of clauses within the environment. The \meta{command}
-%     should expect exactly one argument: the number of the clause. If the
-%     \meta{command} implements a series of commands and the number is the last
-%     argument of a that series, you can directly use the series of commands as
-%     \meta{command}.%^^A
+%   \entry{|ClauseNumberFormat=|\meta{command}}{%^^A
+%     Formats the numbers of clauses within the environment. The
+%     \meta{command} should expect exactly one argument: the number of the
+%     clause. If the \meta{command} implements a series of commands and the
+%     number is the last argument of a that series, you can directly use the
+%     series of commands as \meta{command}.%^^A
 %   }
 %   \end{desctabular}
 % \end{table}
@@ -1227,9 +1246,8 @@
 % The \pkg*{contract} package has been developed in cooperation with a German
 % lawyer. Therefore it initially supported only the languages |german|,
 % |ngerman|, |austrian|, and |naustrian|. Nevertheless, it has been designed
-% to support common language packages like
-% \pkg{babel}. Users can easily make changes by using
-% \cs{providecaptionname}. If you have definitive information
+% to support common language packages like \pkg{babel}. Users can easily make
+% changes by using \cs{providecaptionname}. If you have definitive information
 % about the correct legal terms and conventions of a language, please contact
 % the \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} author. Support
 % for English has been added in this way, and so \pkg*{contract} now also
@@ -1299,8 +1317,8 @@
 %   linerange={6-6,8-8}}]{contract-example-en.tex}%^^A
 % We make some default font settings. Earlier versions of the example also
 % loaded the \pkg{textcomp} package here for an improved section mark
-% (\S). Since \LaTeX{} 2020/02/01, however, the desired functionality is directly
-% integrated in the \LaTeX{} kernel.
+% (\S). Since \LaTeX{} 2020/02/01, however, the desired functionality is
+% directly integrated in the \LaTeX{} kernel.
 %
 % \lstinputcode[{xleftmargin=2em,%^^A
 %   linerange=11-11}]{contract-example-en.tex}%^^A
@@ -1318,11 +1336,12 @@
 % the running head.  Therefore we use the \pstyle{myheadings} page style. This
 % page style generally does not provide automatic running heads.
 %
-% Later, we also want a table of contents with the clauses. This can be achieved
-% with the \opt{juratotoc} option. Doing so we will see
-% that the default width for these numbers is insufficient for the clause
-% numbers in the table of contents. With
-% \opt[element=juratocnumberwidth]{juratocnumberwidth=2.5em}\SpecialOptionIndex{juratocnumberwidth\quotechar=\meta{length}}, we reserve more space.
+% Later, we also want a table of contents with the clauses. This can be
+% achieved with the \opt{juratotoc} option. Doing so we will see that the
+% default width for these numbers is insufficient for the clause numbers in
+% the table of contents. With
+% \opt[element=juratocnumberwidth]{juratocnumberwidth=2.5em}\SpecialOptionIndex{juratocnumberwidth\quotechar=\meta{length}},
+% we reserve more space.
 %
 % The definition of shorthands has already been explained in
 % \autoref{sec:shorthandexample}. In this example we do the same thing
@@ -1396,7 +1415,7 @@
 % this was a real clause, but it was later removed. However, the
 % numbering of the following clauses should not be changed by removing this
 % one. Therefore the \cs{Clause} statement has not been
-% removed but supplemented by option \opt{dummy}. With this, we also can set
+% removed but supplemented by |dummy| property. With this, we also can set
 % a label even though the clause will not be printed.
 %
 % \lstinputcode[{xleftmargin=2em,%^^A
@@ -1435,24 +1454,18 @@
 % \autoref{fig:example}.%^^A
 % %^^A
 % \begin{figure}
-%   \setcapindent{0pt}%^^A
-%   {\hfill
-%     \frame{\includegraphics[page=1,width=.482\textwidth,%^^A
-%       height=.49\textheight,keepaspectratio]{contract-example-en}}\enskip
-%     \frame{\includegraphics[page=2,width=.482\textwidth,%^^A
-%       height=.49\textheight,keepaspectratio]{contract-example-en}}\par
-%     \smallskip}
-%   \begin{captionbeside}[{%^^A
-%     Example: First three pages of the example club by-laws of
-%     \protect\autoref{sec:example}%^^A
-%   }]{%^^A
-%     First three pages of the example club by-laws of
-%     \protect\autoref{sec:example}%^^A
-%   }%^^A
-%   [l]
-%     \frame{\includegraphics[page=3,width=.482\textwidth,%^^A
-%       height=.49\textheight,keepaspectratio]{contract-example-en}}\enskip
-%   \end{captionbeside}
+%   \centering
+%   \frame{\includegraphics[page=1,width=.482\textwidth,%^^A
+%   height=.49\textheight,keepaspectratio]{contract-example-en}}\enskip
+%   \frame{\includegraphics[page=2,width=.482\textwidth,%^^A
+%   height=.49\textheight,keepaspectratio]{contract-example-en}}\par
+%   \smallskip
+%   \frame{\includegraphics[page=3,width=.482\textwidth,%^^A
+%   height=.49\textheight,keepaspectratio]{contract-example-en}}\enskip
+%   \frame{\includegraphics[page=4,width=.482\textwidth,%^^A
+%   height=.49\textheight,keepaspectratio]{contract-example-en}}\par
+%   \caption{The four pages of the CfCH example of
+%     \protect\autoref{sec:example}}
 %   \label{fig:example}
 % \end{figure}
 %
@@ -1480,7 +1493,6 @@
 %   \PrintIndex
 % }
 %
-% \clearpage
 % \addpart{Implementation}
 %
 %    \begin{macrocode}
@@ -1521,7 +1533,12 @@
 %   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} package
 %   \pkg{scrkbase}. For keys of contract environments we can just load
 %   \pkg{scrbase}. For package options we should either also switch to
-%   \pkg{scrbase} or use native key-value options of \LaTeX.
+%   \pkg{scrbase} or use native key-value options of \LaTeX. After doing so we
+%   would be able to replace \pkg*{scrkbase} at least by \pkg{scrextend}. With
+%   this package we still could use commands like
+%   \cs{setkomafont}. Theoretically we would also be able to still use
+%   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} options, but this
+%   would still not be recommended.
 % \end{description}
 %    \begin{macrocode}
 %<*init>
@@ -1705,12 +1722,13 @@
 % \end{option}
 %
 % \begin{option}{paragraphmark,clausemark}
-% \changes{scrjura-v0.9h}{2016/04/11}{\opt{paragraphmark} renamed to \opt{clausemark}}
+% \changes{scrjura-v0.9h}{2016/04/11}{\opt{paragraphmark} renamed to
+%   \opt{clausemark}}
 % \changes{scrjura-v0.7}{2013/11/04}{usage of renewed interface with
 %   \cs{FamilyKeyState}}
 % \changes{scrjura-v0.9a}{2015/03/09}{internal value storage}
-% \changes{scrjura-v3.39}{2022/11/11}{initial dot in member argument of option storage
-%   commands removed}
+% \changes{scrjura-v3.39}{2022/11/11}{initial dot in member argument of option
+%   storage commands removed}
 % \begin{description}
 % \item[Todo:] Re-implementation either using a native key-value option
 %   or a new \pkg{scrbase} family (easy).
@@ -2144,10 +2162,11 @@
 %    \end{macrocode}
 % \begin{macro}{\@defjuraenvironment}
 % \changes{scrjura-v0.9}{2014/11/04}{new}
-% \changes{scrjura-v3.25}{2017/12/08}{new command options \opt{ClauseFont}}
-% \changes{scrjura-v3.25}{2017/12/08}{\cs{reserved@defjuraenvironment} set back to
-%   \cs{relax}}
-% \changes{scrjura-v3.25}{2017/12/08}{using local instead of global command options}
+% \changes{scrjura-v3.25}{2017/12/08}{new command options \texttt{ClauseFont}}
+% \changes{scrjura-v3.25}{2017/12/08}{\cs{reserved@defjuraenvironment} set
+%   back to \cs{relax}}
+% \changes{scrjura-v3.25}{2017/12/08}{using local instead of global command
+%   options}
 % This command is used to define a new \pkg*{contract} environment like
 % \env{contract}. Several options are provided (see the user manual for
 % details).
@@ -2279,7 +2298,7 @@
 % \changes{scrjura-v0.6}{2011/09/30}{new}
 % Title, running head and toc entry of the clause. The title is the default
 % for running head and toc entry. But you can also use an empty value for
-% each of them or use the \opt{no\dots} options to switch them off.
+% each of them or use the \texttt{no\dots} options to switch them off.
 %    \begin{macrocode}
 %<*body>
 \define@key{contract}{title}{%
