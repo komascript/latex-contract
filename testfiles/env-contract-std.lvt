@@ -1,0 +1,47 @@
+% Testfile
+%
+% This file is part of the `contract' test suite to be used with automatic
+% testing of l3build. It should not be part of a distribution of the work.
+%
+
+\input regression-test.tex
+
+\documentclass{article}
+
+\usepackage{contract}
+
+\begin{document}
+
+\sffamily § Test
+
+\START
+\TEST{Using an empty contract environment with standard class}{%
+  \begin{contract}
+  \end{contract}
+}
+
+\TEST{Adding a clause and sub-clause}{%
+  \begin{contract}
+    \Clause
+    
+    \SubClause
+    Test.
+  \end{contract}
+}
+
+\TEST{Adding a clause sub-clause with titles}{%
+  \begin{contract}
+    \Clause[title={Test Clause Title}]
+    
+    \SubClause[title={Test Sub-Clause Title}]
+    Test.
+  \end{contract}
+}
+
+\END
+
+\end{document}
+
+% Local Variables:
+% mode: latex
+% TeX-master: t

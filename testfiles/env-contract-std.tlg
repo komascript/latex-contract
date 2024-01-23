@@ -1,0 +1,26 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Using an empty contract environment with standard class
+============================================================
+============================================================
+============================================================
+TEST 2: Adding a clause and sub-clause
+============================================================
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `Clause' that is an alias of element `contract.Clause'
+(scrkbase)              on input line ....
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `Clause' that is an alias of element `contract.Clause'
+(scrkbase)              on input line ....
+============================================================
+============================================================
+TEST 3: Adding a clause sub-clause with titles
+============================================================
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `Clause' that is an alias of element `contract.Clause'
+(scrkbase)              on input line ....
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `Clause' that is an alias of element `contract.Clause'
+(scrkbase)              on input line ....
+============================================================
