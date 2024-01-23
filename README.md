@@ -15,7 +15,7 @@ The development has just begun …
   - [x] `LICENSE.md`
   - [x] `MANIFEST.md`
   - [x] `build.lua`
-  - [ ] test files
+  - [x] test files
 - [x] renaming several internals of `contract`
 - [x] adding user documentation based on the `scrjura` chapters of the English
       KOMA-Script manual
