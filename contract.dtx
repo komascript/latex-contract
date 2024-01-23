@@ -930,10 +930,10 @@
 % \autoref{sec:example}, \autopageref{sec:example}.%^^A
 %
 %
-% \section{Cross-References}
+% \section{Cross References}
 % \label{sec:ref}
 %
-% The conventional mechanism to set cross-references using \cs{label},
+% The conventional mechanism to set cross references using \cs{label},
 % \cs{ref}, and \cs{pageref} does not suffice for clauses, paragraphs, and
 % sentences.  Therefore \pkg*{contract} provides additional commands.
 %
@@ -1018,10 +1018,10 @@
 % \begin{table}
 %   \captionabove[{%^^A
 %     Available values for the \opt{ref} option to configure the
-%     cross-reference format%^^A
+%     cross reference format%^^A
 %   }]{%^^A
 %     Available values for the \opt{ref} option to configure the
-%     cross-reference format of \cs{ref},
+%     cross reference format of \cs{ref},
 %     \cs{refPar}, and \cs{refSentence}%^^A
 %     \label{tab:ref}%^^A
 %   }%^^A
@@ -1110,7 +1110,7 @@
 %   \KOMAoptions{captions=topbeside}%^^A
 %   \setcapindent{0pt}%^^A
 %   \begin{captionbeside}{Example outputs of the \opt{ref}-independent 
-%     cross-reference commands}[l]
+%     cross reference commands}[l]
 %     \begin{tabular}[t]{ll}
 %       \toprule
 %       Command                               & Example output \\
@@ -1225,7 +1225,7 @@
 %  \DeclareNewJuraEnvironment{Article}[ClauseNumberFormat=Art.~]
 %                            {\KOMAoptions{parskip}}{}
 %\end{lstcode}
-%   In cross-references, ``Art.'' will  of course be used instead of ``\S''.%^^A
+%   In cross references, ``Art.'' will  of course be used instead of ``\S''.%^^A
 %
 %   The new environment is used like \env{contract}:
 %\begin{lstcode}[gobble=1]
@@ -1401,7 +1401,7 @@
 %
 % \lstinputcode[{xleftmargin=2em,%^^A
 %   linerange=72-78}]{contract-example-en.tex}%^^A
-% The third clause contains something special: a cross-reference. Here we use
+% The third clause contains something special: a cross reference. Here we use
 % the long form with clause, paragraph, and sentence. If we decided later that
 % sentences should not be included in the reference, we could use the
 % \opt{ref=nosentence} option to set this globally.
@@ -1427,7 +1427,7 @@
 %
 % \lstinputcode[{xleftmargin=2em,%^^A
 %   linerange=89-98}]{contract-example-en.tex}%^^A
-% Here we have a real clause again. We cross-reference one of the deleted
+% Here we have a real clause again. We cross reference one of the deleted
 % clauses and also set a label.
 %
 % \lstinputcode[{xleftmargin=2em,%^^A
@@ -1466,6 +1466,39 @@
 %     \protect\autoref{sec:example}}
 %   \label{fig:example}
 % \end{figure}
+%
+% \section{From \pkg*{scrjura} to \pkg*{contract}}
+% \label{sec:switchpackage}
+%
+% If you have been using the \pkg*{scrjura} package and are now switching to
+% the \pkg*{contract} package, there are a few things you need to be aware of:
+% \begin{itemize}
+% \item Instead of
+%   \begin{syntax}
+%     \cs{usepackage}\oarg{options}\targ{scrjura}\quad,
+%   \end{syntax}
+%   should now use
+%   \begin{syntax}
+%     \cs{usepackage}\oarg{options}\targ{contract}\quad.
+%   \end{syntax}
+%   The same \meta{options} are allowed as the \pkg*{scrjura} package
+%   understands.
+% \item Instead of using \cs{KOMAoptions} or \cs{KOMAoption} to set
+%   \meta{options} for the \pkg*{contract} package, use \cs{contractSetup}.
+% \item The \cs{Clause} and \cs{SubClause} commands now have an optional
+%   argument instead of a mandatory argument. This makes more sense because it
+%   is allowed to use \cs{Clause} or \cs{SubClause} without an
+%   argument. Instead of braces, the list of properties must be given
+%   in square brackets, for example:
+%\begin{lstcode}[gobble=1]
+%   \Clause[title={title of clause}]
+%\end{lstcode}
+%   Therefore, even more care should be taken to ensure that the values of
+%   each property are enclosed in braces. Otherwise, there may be problems not
+%   only with commas, but also with square brackets in the values.
+% \item Check your code if you have used or redefined any internal macros as
+%   several of them have been renamed.
+% \end{itemize}
 %
 % \section{State of Development}
 % \label{sec:draft}
@@ -1941,7 +1974,7 @@
 %</postoptions>
 %    \end{macrocode}
 %
-% \section{Deprecated paragraph commands}
+% \section{Deprecated Paragraph Commands}
 %
 % All these commands are deprecated and now generate error messages instead of
 % code.
@@ -2008,7 +2041,7 @@
 % \end{command}
 %
 %
-% \section{Contracts, clauses, paragraphs and sentences}
+% \section{Contracts, Clauses, Paragraphs and Sentences}
 %
 %
 % \begin{macro}{\contract@env@type}
@@ -2392,11 +2425,13 @@
 % For the headings we use manual paragraph numbering, because we don't want
 % any paragraph numbering inside the heading. After initializing the options
 % they are processed.
-% \changes{scrjura-v0.7}{2013/04/18}{increase counter \cnt{contractAbsoluteClause}}
+% \changes{scrjura-v0.7}{2013/04/18}{increase counter
+%   \cnt{contractAbsoluteClause}}
 % \changes{scrjura-v0.7b}{2014/11/03}{more flexible
 %   \cnt{\meta{environment}AbsoluteClause}}
+% \changes{0.0.2}{2024/01/23}{the argument is optional}
 %    \begin{macrocode}
-\newcommand*{\contract@paragraph}[1]{%
+\NewDocumentCommand\contract@paragraph {o} {%
   \stepcounter{\contract@env@type AbsoluteClause}%
   \ManualPar\parnumbertrue
   \let\contract@title\relax
@@ -2404,7 +2439,7 @@
   \let\contract@head\relax
   \let\contract@number\relax
   \contract@dummyfalse
-  \ifx\relax#1\relax\else\setkeys{contract}{#1}\fi
+  \IfValueT{#1}{\setkeys{contract}{#1}}%
 %    \end{macrocode}
 % Unless this is a dummy clause, the headings will be initialized and vertical
 % skips will be done.
@@ -2454,7 +2489,7 @@
   \fi
   \if@contract@skiphyperref\else
     \hyper@refstepcounter{@AbsClause}%
-    \typeout{absolute Nummer: \the@AbsClause^^JLabel: `\@currentHref'}%
+%<+trace>    \typeout{absolute Number: \the@AbsClause^^JLabel: `\@currentHref'}%
   \fi
 %    \end{macrocode}
 % For simplification we use the code of clauses for sub-clauses.
@@ -2494,18 +2529,17 @@
 % \end{macro}
 %
 % \begin{macro}{\contract@subparagraph}
-% \changes{scrjura-v0.6a}{2012/10/08}{fehlendes \cs{par} ergänzt}
-% \changes{scrjura-v0.7}{2013/04/18}{Zähler \texttt{contractAbsoluteClause} wird
-%   erhöht}
-% \changes{scrjura-v0.7}{2013/04/28}{Abstand nach der Nummer als Bestandteil der
-%   Nummer setzen}
-% \changes{scrjura-v0.9i}{2017/02/23}{Verwendung von \cs{ext@toc}}
+% \changes{scrjura-v0.6a}{2012/10/08}{missing \cs{par} added}
+% \changes{scrjura-v0.7}{2013/04/18}{increasing counter
+%    \cnt{contractAbsoluteClause}}
+% \changes{scrjura-v0.7}{2013/04/28}{distance after number}
+% \changes{scrjura-v0.9i}{2017/02/23}{usage of \cs{ext@toc}}
 % \changes{scrjura-v3.41}{2023/06/24}{update of \cs{@currentcounter} added}
-% Das entspricht bis auf wenige Kleinigkeiten, die Unterparagraphen betreffen,
-% |\contract@paragraph|
+% \changes{0.0.2}{2024/01/23}{the argument is optional}
+% This is almost the same like \cs{contract@paragraph}.
 %    \begin{macrocode}
 %<*body>
-\newcommand*{\contract@subparagraph}[1]{%
+\NewDocumentCommand \contract@subparagraph {o}{%
   \stepcounter{\contract@env@type AbsoluteClause}%
   \ManualPar\parnumbertrue
   \let\contract@title\relax
@@ -2513,7 +2547,7 @@
   \let\contract@head\relax
   \let\contract@number\relax
   \contract@dummyfalse
-  \ifx\relax#1\relax\else\setkeys{contract}{#1}\fi
+  \IfValueT{#1}{\setkeys{contract}{#1}}%
   \ifcontract@dummy\else
     \par
     \@afterindentfalse
@@ -2541,7 +2575,7 @@
   \fi
   \if@contract@skiphyperref\else
     \hyper@refstepcounter{@AbsClause}%
-    \typeout{absolute Nummer: \the@AbsClause^^JLabel: `\@currentHref'}%
+%<+trace>    \typeout{absolute Number: \the@AbsClause^^JLabel: `\@currentHref'}%
   \fi
   \ifcontract@dummy\else
     \begingroup
@@ -2729,7 +2763,7 @@
 % \end{macro}%^^A \@doendpe
 % \end{macro}%^^A \contract@used@everypar
 %
-% \section{Entry to table of contents}
+% \section{Entry to Table of Contents}
 % \begin{macro}{\l@cpar}
 % Toc entry of contract clauses.
 % \changes{scrjura-v3.27}{2019/02/25}{usage of \pkg{tocbasic}}
@@ -2747,7 +2781,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \section{Numbering of paragraphs and sentences}
+% \section{Numbering of Paragraphs and Sentences}
 %
 % \begin{macro}{\contract@separator}
 % \changes{scrjura-v0.7b}{2014/11/03}{\cs{jura@separator} renamed}
@@ -2874,7 +2908,7 @@
       \fi
       \getmaxpar\@tempa{\contract@env@type}%
                        {\csname the\contract@env@type AbsoluteClause\endcsname}%
-      \typeout{Stored max is \@tempa}%
+%<+trace>      \typeout{Stored max is \@tempa}%
       \def\reserved@a##1\@nnil{\def\@tempa{##1}}%
       \afterassignment\reserved@a\@tempcnta=0\@tempa\relax\@nnil
       \ifnum \@tempcnta>\@ne
@@ -3390,7 +3424,7 @@
 %    \end{macrocode}
 % \end{command}
 %
-% \section{Language dependent names}
+% \section{Language Dependent Names}
 %
 % \begin{command}{\parname,\parshortname,\sentencename,\sentenceshortname}
 % \begin{macro}{\contract@lang@error}
@@ -3444,7 +3478,7 @@
 % \end{macro}
 % \end{command}
 %
-% \section{Using values from last \LaTeX{} run}
+% \section{Using Values from last \LaTeX{} Run}
 %
 % \begin{command}{\newmaxpar}
 % \changes{scrjura-v0.6b}{2013/04/16}{\cs{\#1@Clauseformat} expands to its argument}
