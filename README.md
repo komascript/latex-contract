@@ -176,4 +176,4 @@ If you have been using the `scrjura` package and are now switching to the
 the `contract` user manual. The most important and incompatible change IMHO
 is, that the argument of `\Clause` and `\SubClause` isn't mandaroty any longer
 but optional. So the syntax has changed to `\Clause[<options>]`
-resp. `\SubClause[<option>]`.
+resp. `\SubClause[<options>]`.
