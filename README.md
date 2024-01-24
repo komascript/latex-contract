@@ -55,8 +55,8 @@ unpack it using
 Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
 `lualatex`!
 
-**Important Note:** The user manual of `contract` uses some package, that are
-still under development and therefore currently may not be available on
+**Important Note:** The user manual of `contract` uses some packages, which
+are still under development and therefore currently may not be available on
 CTAN. So it is recommended to use the existing `contract.pdf`, which is also
 part of [the CTAN distribution](https://www.ctan.org/pkg/contract). As an
 alternative you may use the file available at the corresponding [github
@@ -77,8 +77,8 @@ You can than unpack and install `contract` using:
 	
 from within the main directory of the cloned respository.
 
-**Important Note:** The user manual of `contract` uses some package, that are
-still under development and therefore currently may not be available on
+**Important Note:** The user manual of `contract` uses some packages, which
+are still under development and therefore currently may not be available on
 CTAN. So you usually cannot use `l3build doc` to generate the documentation or
 `l3build install --full` to install `contract` with the documentation. Instead
 you either have to read `contract.dtx` or use the `contract.pdf` available at
