@@ -55,7 +55,7 @@ unpack it using
 Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
 `lualatex`!
 
-**Important Note:** The user manual of `contract` uses some packages, which
+**Important Note:** The user manual of `contract` uses some Ppackages, which
 are still under development and therefore currently may not be available on
 CTAN. So it is recommended to use the existing `contract.pdf`, which is also
 part of [the CTAN distribution](https://www.ctan.org/pkg/contract). As an
