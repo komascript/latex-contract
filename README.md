@@ -177,3 +177,9 @@ the `contract` user manual. The most important and incompatible change IMHO
 is, that the argument of `\Clause` and `\SubClause` isn't mandaroty any longer
 but optional. So the syntax has changed to `\Clause[<options>]`
 resp. `\SubClause[<options>]`.
+
+**Note:** For a transitional period, KOMA-Script will continue to contain a
+package `scrjura`, which is a wrapper to `contract` and attempts to increase
+compatibility. With this package, the argument of `\Clause` and `\SubClause`
+will remain mandatory for the time being.H owever, this package is expected to
+disappear from KOMA-Script after a reasonable period of smooth transition.
