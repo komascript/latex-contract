@@ -7,7 +7,7 @@
   This file is part of the build system of contract.
 ]]
 
-release_info = "2024-01-19 v0.0.2"
+release_info = "2024-01-25 v0.9"
 -- Bundle and modules
 
 module       = "contract"
@@ -55,14 +55,30 @@ function update_tag (file,content,tagname,tagdate)
    tagyear = string.sub (tagdate, 1, 4 )
    
    oldyear = string.match (content, "Copyright %(c%) (%d%d%d%d) Markus Kohm")
+   if not oldyear then
+      oldyear = string.match (content, "Copyright © (%d%d%d%d) Markus Kohm")
+   end
+      
    if oldyear and oldyear < tagyear then
       content = string.gsub (content,
-			     "Copyright %(c%) (%d%d%d%d) Markus Kohm",
-			     "Copyright (c) %1-" .. tagyear .. " Markus Kohm")
+			     "(Copyright %(c%) %d%d%d%d) Markus Kohm",
+			     "%1-" .. tagyear .. " Markus Kohm")
+      content = string.gsub (content,
+			     "(Copyright © %d%d%d%d) Markus Kohm",
+			     "%1-" .. tagyear .. " Markus Kohm")
    else
      content = string.gsub (content,
-			    "Copyright %(c%) (%d%d%d%d)[-–—]%d%d%d%d Markus Kohm",
-			    "Copyright (c) %1-" .. tagyear .. " Markus Kohm")
+			    "(Copyright %(c%) %d%d%d%d%-)%d%d%d%d Markus Kohm",
+			    "%1" .. tagyear .. " Markus Kohm")
+     content = string.gsub (content,
+			    "(Copyright © %d%d%d%d%-)%d%d%d%d Markus Kohm",
+			    "%1" .. tagyear .. " Markus Kohm")
+     content = string.gsub (content,
+			    "(Copyright %(c%) %d%d%d%d–)%d%d%d%d Markus Kohm",
+			    "%1" .. tagyear .. " Markus Kohm")
+     content = string.gsub (content,
+			    "(Copyright © %d%d%d%d–)%d%d%d%d Markus Kohm",
+			    "%1" .. tagyear .. " Markus Kohm")
    end
    
    if string.match (file, "%.dtx$") then
@@ -71,8 +87,8 @@ function update_tag (file,content,tagname,tagdate)
                              "\n  " .. tagdate .. " v" .. tagname )
    elseif string.match (file, "%.md$") then
       content = string.gsub (content,
-                             "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+  \n",
-                             "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
+                             "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+\n",
+                             "\nRelease: " .. tagdate .. " v" .. tagname .. "\n")
    elseif string.match (file, "%.lua$") then
       content = string.gsub (content,
                              '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"%s*\n',
