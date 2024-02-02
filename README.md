@@ -37,15 +37,20 @@ purpose of the package.
 
 # Installation for Users
 
-If you are a user, you should wait until the package has been added to your
-preferred TeX distribution. Then you can use the package manager of your TeX
-distribution to install the package.
+If you are a user, I would usually say, that you should wait until the
+package has been added to your preferred TeX distribution. Then you can use
+the package manager of your TeX distribution to install the package. But in
+case of `contract` is currently seems, that it will never be part of any TeX
+distribution. So if you would like to use the package, you would need to do
+the [“Unpacking and Installation for
+Developers”](#unpacking-and-installation-for-developers).
 
 # Unpacking for Distributors
 
-Distributors should download [the distribution from
-CTAN](https://www.ctan.org/pkg/contract). See `MANIFEST.md` for information
-about the files, that build the distribution.
+Distributors should [download the current
+release](https://github.com/komascript/latex-contract/releases). See
+[`MANIFEST.md`](https://github.com/komascript/latex-contract/blob/main/MANIFEST.md)
+for information about the files, that build the distribution.
 
 If distributors also want to distribute `contract.sty`, they can
 unpack it using
@@ -57,10 +62,8 @@ Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
 
 **Important Note:** The user manual of `contract` uses some packages, which
 are still under development and therefore currently may not be available on
-CTAN. So it is recommended to use the existing `contract.pdf`, which is also
-part of [the CTAN distribution](https://www.ctan.org/pkg/contract). As an
-alternative you may use the file available at the corresponding [github
-release of `contract`](https://github.com/komascript/latex-contract/releases).
+CTAN. So it is recommended to use the existing `contract.pdf` from the
+[release](https://github.com/komascript/latex-contract/release) you are using.
 
 # Unpacking and Installation for Developers
 
@@ -88,7 +91,7 @@ such a PDF to the `doc/latex/contract/` folder of any TEXMF tree.
 
 # How to get the Manual
 
-After installation `contract` and the user manual you can use:
+After installation of `contract` and the user manual you can use:
 
     texdoc contract
 	
