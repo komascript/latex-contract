@@ -2,7 +2,7 @@
 
 Copyright © 2007–2024 Markus Kohm
 
-Release: 2024-01-25 v0.9
+Release: 2024-02-02 v0.9
 
 License: LPPL 1.3c
 
