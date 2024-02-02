@@ -181,5 +181,5 @@ resp. `\SubClause[<options>]`.
 **Note:** For a transitional period, KOMA-Script will continue to contain a
 package `scrjura`, which is a wrapper to `contract` and attempts to increase
 compatibility. With this package, the argument of `\Clause` and `\SubClause`
-will remain mandatory for the time being.H owever, this package is expected to
+will remain mandatory for the time being. However, this package is expected to
 disappear from KOMA-Script after a reasonable period of smooth transition.
