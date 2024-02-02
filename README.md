@@ -37,9 +37,9 @@ purpose of the package.
 
 # Installation for Users
 
-If you are a user, you should wait until all the package has been added to
-your preferred TeX distribution. Then you can use the package manager of your
-TeX distribution to install the packages.
+If you are a user, you should wait until the package has been added to your
+preferred TeX distribution. Then you can use the package manager of your TeX
+distribution to install the package.
 
 # Unpacking for Distributors
 
@@ -100,7 +100,7 @@ release](https://github.com/komascript/latex-contract/releases).
 
 To become a contributor, e.g., do heavy testing. If you find an issue, please
 [report it](#how-to-report-issues). You can also become a developer and, e.g.,
-make new test files to the packages. See the
+make new test files to the package. See the
 [`l3build`](https://ctan.org/pkg/l3build) manual for more information about
 tests. If you've created a new test and think that it would be useful, please
 either do a pull request or [add a new issue](#how-to-report-issues) and
