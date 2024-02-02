@@ -50,6 +50,18 @@ etc., package files.
 * contract.pdf ‡
 * contract-example-de.pdf ‡
 
+### Test files
+
+These files form the test suite for the package. `.lvt` or `.lte` files are the individual
+unit tests, and `.tlg` are the stored output for ensuring changes to the package produce
+the same output. These output files are sometimes shared and sometime specific for
+different engines (pdfTeX, XeTeX, LuaTeX, etc.).
+
+* env-contract-std.lvt 
+* env-contract.lvt 
+* env-contract-std.tlg 
+* env-contract.tlg 
+
 
 ## TDS manifest
 
