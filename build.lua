@@ -34,6 +34,9 @@ uploadconfig = {
   author      = "Markus Kohm",
   license     = "lppl1.3c",
   summary     = "environments for contracts, laws, acts or other legal pupose",
+  description = [[The package is a KOMA-Script spin-off replacing the KOMA-Script package scrjura. It provides environments for contracts, laws, acts or other legal puposes. It features support for automatic numbering of paragraphs, and semi-automatic numbering of sentences.
+
+Support is offered for both German and English texts.]],
   topic       = "legal",
   ctanPath    = "/macros/latex/contrib/contract",
   bugtracker  = "https://github.com/komascript/latex-contract/issues",
