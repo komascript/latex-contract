@@ -40,7 +40,7 @@ purpose of the package.
 If you are a user, I would usually say, that you should wait until the
 package has been added to your preferred TeX distribution. Then you can use
 the package manager of your TeX distribution to install the package. But in
-case of `contract` is currently seems, that it will never be part of any TeX
+case of `contract` it currently seems, that it will never be part of any TeX
 distribution. So if you would like to use the package, you would need to do
 the [“Unpacking and Installation for
 Developers”](#unpacking-and-installation-for-developers).
