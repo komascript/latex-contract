@@ -18,13 +18,17 @@ be installed for processing such as testing.
 
 * contract.dtx ‡
 
-### Typeset documentation source files
+### Documentation files
 
-These files are typeset using LaTeX to produce the PDF documentation for the package.
+These files form part of the documentation but are not typeset. Generally they will be
+additional input files for the typeset documentation files listed above.
 
 * contract-example-en.tex ‡
 * contract.dtx ‡
 * contract-example-de.tex ‡
+* contract-example-en.pdf ‡
+* contract-example-de.pdf ‡
+* contract.pdf ‡
 
 ### Text files
 
@@ -40,15 +44,6 @@ The files created by ‘unpacking’ the package sources. This typically include
 `.sty` and `.cls` files created from DocStrip `.dtx` files.
 
 * contract.sty †
-
-### Typeset documents
-
-The output files (PDF, essentially) from typesetting the various source, demo,
-etc., package files.
-
-* contract-example-en.pdf ‡
-* contract.pdf ‡
-* contract-example-de.pdf ‡
 
 ### Test files
 
@@ -91,6 +86,7 @@ All files included in the `contract/doc` directory.
 * contract-example-de.tex 
 * contract-example-en.pdf 
 * contract-example-en.tex 
+* contract.dtx 
 * contract.pdf 
 
 
