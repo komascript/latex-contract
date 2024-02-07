@@ -16,14 +16,17 @@ unpackfiles  = { "contract.dtx" }
 
 installfiles = { "contract.sty" }
 
-typesetfiles = { }
+typesetfiles = {
+}
 
-docfiles     = { "contract-example-en.tex",
-		 "contract.dtx",
-		 "contract-example-de.tex",
-		 "contract-example-en.pdf",
-		 "contract-example-de.pdf",
-		 "contract.pdf" }
+docfiles     = {
+   "contract-example-en.tex",
+   "contract.dtx",
+   "contract-example-de.tex",
+   "contract-example-en.pdf",
+   "contract-example-de.pdf",
+   "contract.pdf"
+}
 
 -- Package
 
