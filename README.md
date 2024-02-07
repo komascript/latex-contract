@@ -101,7 +101,7 @@ unpack it using:
     tex contract.dtx
 	
 For a temporary local installation see “[Installation for
-Users](#installaton-for-users)” above.
+Users](#installation-for-users)” above.
 
 # Unpacking and Installation for Developers
 
