@@ -2,7 +2,7 @@
 
 Copyright © 2007–2024 Markus Kohm
 
-Release: 2024-02-02 v0.9
+Release: 2024-02-07 v0.91
 
 License: LPPL 1.3c
 
@@ -40,10 +40,53 @@ purpose of the package.
 If you are a user, I would usually say, that you should wait until the
 package has been added to your preferred TeX distribution. Then you can use
 the package manager of your TeX distribution to install the package. But in
-case of `contract` it currently seems, that it will never be part of any TeX
-distribution. So if you would like to use the package, you would need to do
-the [“Unpacking and Installation for
-Developers”](#unpacking-and-installation-for-developers).
+case of `contract` it currently seems, that it could not be uploaded to CTAN
+and therefore will never be part of any TeX distribution. So if you would like
+to use the package, you would need to
+
+ - [Download the current
+release](https://github.com/komascript/latex-contract/releases)  
+ You can either use the file named “**Source code** (zip)” or the file “**Source
+ code** (tar.gz)”. Windows users are recommended to use the zip. By
+ downloading the file you will get something like `latex-contract-0.91.zip`
+ resp. `latex-contract-0.91.tar.gz`.
+
+ - Unpack the downloaded file  
+ The downloaded file is an archive, that contains several files. Despite the
+ Windows File Explorer and also Mac-OS, KDE's Dolphin, Gnome's Nautilus and
+ many other file managers are able to open such archive files, you should
+ instead right-click on it to extract it. I recommend to keep the directory
+ structure while extracting. This gives a new directory
+ `latex-contract-<version>`, e.g., `latex-contract-0.91`.
+
+ - Open a shell/terminal in the new directory `latex-contract-<version>`.
+
+ - Use `l3build` to install the package and the documentation:
+
+        l3build install --full
+
+   
+If you don't get an error message, the installation was successful and you
+should be able to use LaTeX package `contract`. To test, that LaTeX is able to
+find the file, try:
+
+    kpsewhich contract.sty
+	
+This should show you the whole path of the LaTeX package file.
+
+**Note:** The installation above is currently tested only with TeX
+Live. MiKTeX users may also need to run the `MiKTeX Console` to update the
+filename database. See the MiKTeX manual for more information.
+   
+**Note:** The installation described above, does not work for a snapshot
+archive or a git clone of the `main` branch. It only works for the `release`
+branch resp. [a release
+download](https://github.com/komascript/latex-contract/releases). For
+installation of a snapshot or git clone of the `main` branch see “[Unpacking
+and Installation for Developers](#unpacking-and-installation-for-developers)”
+below. For some reasons it also does not work for release v0.9. If you need to
+use release v0.9 see “[Unpacking and Installation for
+Developers](#unpacking-and-installation-for-developers)”.
 
 # Unpacking for Distributors
 
@@ -53,17 +96,12 @@ release](https://github.com/komascript/latex-contract/releases). See
 for information about the files, that build the distribution.
 
 If distributors also want to distribute `contract.sty`, they can
-unpack it using
+unpack it using:
 
     tex contract.dtx
 	
-Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
-`lualatex`!
-
-**Important Note:** The user manual of `contract` uses some packages, which
-are still under development and therefore currently may not be available on
-CTAN. So it is recommended to use the existing `contract.pdf` from the
-[release](https://github.com/komascript/latex-contract/release) you are using.
+For a temporary local installation see “[Installation for
+Users](#installation-for-users)” above.
 
 # Unpacking and Installation for Developers
 
@@ -85,9 +123,11 @@ are still under development and therefore currently may not be available on
 CTAN. So you usually cannot use `l3build doc` to generate the documentation or
 `l3build install --full` to install `contract` with the documentation. Instead
 you either have to read `contract.dtx` or use the `contract.pdf` available at
-part of the newest [`contract`
-release](https://github.com/komascript/latex-contract/releases). You can copy
-such a PDF to the `doc/latex/contract/` folder of any TEXMF tree.
+the newest [`contract`
+release](https://github.com/komascript/latex-contract/releases) or [the
+`release`
+branch](https://github.com/komascript/latex-contract/tree/release). You can
+copy such PDFs to the `doc/latex/contract/` folder of any TEXMF tree.
 
 # How to get the Manual
 
@@ -97,7 +137,9 @@ After installation of `contract` and the user manual you can use:
 	
 Without installation you can get `contract.pdf` as part of the corresponding
 [`contract`
-release](https://github.com/komascript/latex-contract/releases).
+release](https://github.com/komascript/latex-contract/releases) or [the
+`release`
+branch](https://github.com/komascript/latex-contract/tree/release).
 
 # How to Contribute
 
@@ -108,6 +150,14 @@ make new test files to the packageP. See the
 tests. If you've created a new test and think that it would be useful, please
 either do a pull request or [add a new issue](#how-to-report-issues) and
 include your test file.
+
+If you would like to have the package on CTAN and also in TeX distributions,
+you can become the CTAN release agent of `latex-contract`. To do this,
+however, you must first convince the CTAN team that `contract` is a suitable,
+not too generic name for a new LaTeX package. Unfortunately, I was not able to
+do this. Queries to me about this and about possible renaming of the package
+are undesirable and risk further stalling the development of this LaTeX
+package and all my other LaTeX packages.
 
 
 # How to Report Issues
