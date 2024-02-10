@@ -35,58 +35,20 @@ KOMA-Script and has since been called `contract`. The new name was chosen to
 avoid confusion with KOMA-Script packages. Secondly, it better reflects the
 purpose of the package.
 
+# Contributors/Collaborators
+
+ - *Markus Kohm aka KOMA aka [komascript](https://github.com/komascript)*:  
+ Maintainer, Developer, “go-to guy”
+ 
+ - *[Keks-Dose](https://github.com/Keks-Dose)*:  
+ CTAN Release Manager, Tester, “idea man”
+
+
 # Installation for Users
 
-If you are a user, I would usually say, that you should wait until the
-package has been added to your preferred TeX distribution. Then you can use
-the package manager of your TeX distribution to install the package. But in
-case of `contract` it currently seems, that it could not be uploaded to CTAN
-and therefore will never be part of any TeX distribution. So if you would like
-to use the package, you would need to
-
- - [Download the current
-release](https://github.com/komascript/latex-contract/releases)  
- You can either use the file named “**Source code** (zip)” or the file “**Source
- code** (tar.gz)”. Windows users are recommended to use the zip. By
- downloading the file you will get something like `latex-contract-0.91.zip`
- resp. `latex-contract-0.91.tar.gz`.
-
- - Unpack the downloaded file  
- The downloaded file is an archive, that contains several files. Despite the
- Windows File Explorer and also Mac-OS, KDE's Dolphin, Gnome's Nautilus and
- many other file managers are able to open such archive files, you should
- instead right-click on it to extract it. I recommend to keep the directory
- structure while extracting. This gives a new directory
- `latex-contract-<version>`, e.g., `latex-contract-0.91`.
-
- - Open a shell/terminal in the new directory `latex-contract-<version>`.
-
- - Use `l3build` to install the package and the documentation:
-
-        l3build install --full
-
-   
-If you don't get an error message, the installation was successful and you
-should be able to use LaTeX package `contract`. To test, that LaTeX is able to
-find the file, try:
-
-    kpsewhich contract.sty
-	
-This should show you the whole path of the LaTeX package file.
-
-**Note:** The installation above is currently tested only with TeX
-Live. MiKTeX users may also need to run the `MiKTeX Console` to update the
-filename database. See the MiKTeX manual for more information.
-   
-**Note:** The installation described above, does not work for a snapshot
-archive or a git clone of the `main` branch. It only works for the `release`
-branch resp. [a release
-download](https://github.com/komascript/latex-contract/releases). For
-installation of a snapshot or git clone of the `main` branch see “[Unpacking
-and Installation for Developers](#unpacking-and-installation-for-developers)”
-below. For some reasons it also does not work for release v0.9. If you need to
-use release v0.9 see “[Unpacking and Installation for
-Developers](#unpacking-and-installation-for-developers)”.
+If you are a user, you should usually wait until the package has been added to
+your preferred TeX distribution. Then you can use the package manager of your
+TeX distribution to install the package.
 
 # Unpacking for Distributors
 
@@ -100,8 +62,11 @@ unpack it using:
 
     tex contract.dtx
 	
-For a temporary local installation see “[Installation for
-Users](#installation-for-users)” above.
+or temporary install `contract` into a TEXMF tree using:
+
+    l3build install --full --texmfhome <TDS root directory>
+	
+and then use the files from the selected `<TDS root directory>`.
 
 # Unpacking and Installation for Developers
 
@@ -150,15 +115,6 @@ make new test files to the packageP. See the
 tests. If you've created a new test and think that it would be useful, please
 either do a pull request or [add a new issue](#how-to-report-issues) and
 include your test file.
-
-If you would like to have the package on CTAN and also in TeX distributions,
-you can become the CTAN release agent of `latex-contract`. To do this,
-however, you must first convince the CTAN team that `contract` is a suitable,
-not too generic name for a new LaTeX package. Unfortunately, I was not able to
-do this. Queries to me about this and about possible renaming of the package
-are undesirable and risk further stalling the development of this LaTeX
-package and all my other LaTeX packages.
-
 
 # How to Report Issues
 
