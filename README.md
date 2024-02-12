@@ -173,7 +173,8 @@ Further milestones could be:
  - [ ] reimplementing several internals of `contract`:
    - [ ] replacing KOMA-Script options by LaTeX key-value options
    - [ ] replacing \newkomafont, \setkomafont by something not KOMA-Script
-         related or alterntively internally uses `scrkbase` by `scrextend`,
+         related or alterntively replacing the the internally used `scrkbase`
+         by `scrextend`,
    - [ ] using `expl3`, 
    - [ ] using the new paragraph hooks of LaTeX,
    - [ ] using the extended referencing mechanism of LaTeX.
