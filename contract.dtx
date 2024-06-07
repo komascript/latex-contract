@@ -32,9 +32,12 @@
 \ProvidesFile{contract.dtx}[%
 %</dtx>
 %<package&identify>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+%<package&identify>\providecommand*\DeclareRelease[3]{}
+%<package&identify>\providecommand*\DeclareCurrentRelease[2]{}
+%<package&identify>\DeclareCurrentRelease{v0.9}{2024-02-02}
 %<package&identify>\ProvidesPackage{contract}[%
 %<*dtx|(package&identify)>
-  2024-02-07 v0.91
+  2024-06-07 v0.92
 %<*dtx>
   source of
 %</dtx>
@@ -416,7 +419,14 @@
 % \begin{description}
 % \item[Note:] Currently the options are still implemented using the internal
 %   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} package
-%   \href{https://www.ctan.org/pkg/koma-script}{\pkg*{scrkbase}}. Therefore
+%   \href{https://www.ctan.org/pkg/koma-script}{\pkg*{scrkbase}}\footnote{You
+%     need at least \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript}
+%     v3.39 to have \pkg*{scrkbase} and all other \KOMAScript{} packages
+%     required by \pkg*{scrkbase} and \pkg*{contract} installed. If you use
+%     the recommended installation with the package manager of your
+%     \TeX{} distribution this version requirement should be fulfilled by
+%     installing the \KOMAScript{} package or by updating an already
+%     installed \KOMAScript.}. Therefore
 %   you could also setup \meta{options} using the
 %   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} commands
 %   \cs{KOMAoptions} or \cs{KOMAoption}, which are described in
@@ -1555,9 +1565,12 @@
 %
 % \section{Prerequisites}
 %
+% \changes{v0.92}{2024/06/07}{need at least \pkg*{scrkbase} v3.39}
 % We need package \pkg{scrkbase}. We could load this also together with
 % \pkg{tocbasic}, which is loaded later. But loading it on its own, we can
-% require a minimum version.
+% require a minimum version. At least the version of 2022/11/11 would be
+% needed, but the release was 2023/04/17 v3.39. So this is the version we
+% request.
 % \begin{description}
 % \item[Todo:] Package \pkg*{contract} is no longer a
 %   \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript} package. So it
@@ -1574,7 +1587,7 @@
 % \end{description}
 %    \begin{macrocode}
 %<*init>
-\RequirePackage{scrkbase}[2013/03/26]
+\RequirePackage{scrkbase}[2023/04/17]
 %</init>
 %    \end{macrocode}
 %
