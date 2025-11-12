@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 % ======================================================================
 % contract.dtx
-% Copyright (c) 2007–2024 Markus Kohm
+% Copyright (c) 2007–2025 Markus Kohm
 %
 % This file is part of the LaTeX2e KOMA-Script bundle.
 %
@@ -37,7 +37,7 @@
 %<package&identify>\DeclareCurrentRelease{v0.9}{2024-02-02}
 %<package&identify>\ProvidesPackage{contract}[%
 %<*dtx|(package&identify)>
-  2024-06-07 v0.92
+  2025-11-12 v0.92
 %<*dtx>
   source of
 %</dtx>
@@ -1598,8 +1598,7 @@
 %</init>
 %    \end{macrocode}
 %
-% \section{Options}
-%
+% \section{Options}%
 % \begin{option}{contract}
 % \begin{macro}{\if@documentcontract,
 %               \@documentcontractfalse,\@documentcontracttrue}
@@ -1988,75 +1987,9 @@
 %</postoptions>
 %    \end{macrocode}
 %
-% \section{Deprecated Paragraph Commands}
-%
-% All these commands are deprecated and now generate error messages instead of
-% code.
-%
-% \begin{command}{\Paragraph,\SubParagraph,\refParagraph,\refParagraphN,
-%                 \DeprecatedParagraph,\ParagraphCompatibilityHacks}
-% \changes{scrjura-v1.0}{2014/11/22}{throw error for deprecated commands but
-%   only once}
-% \begin{description}
-% \item[Todo:] Remove deprecated commands, because they already throw errors
-%   for about nine years.
-% \end{description}
-%    \begin{macrocode}
-%<*body>
-\providecommand*{\DeprecatedParagraph}{%
-  \PackageError{contract}{modification of old document needed}{%
-    It seem that this document was made for scrjura up to version
-    0.7a.\MessageBreak
-    Since scrjura version 0.9 \string\Paragraph, \string\SubParagraph, and all
-    depending\MessageBreak
-    commands, options, and counters have been renamed.\MessageBreak
-    You should replace the terms `Paragraph' and `paragraph` by `Clause`
-    and\MessageBreak
-    `clause` if they are part of the name of a contract feature, otherwise
-    this\MessageBreak
-    document may produce severall additional error messages and maybe the
-    wrong\MessageBreak
-    result. Sorry for the inconvenience.%
-  }%
-  \ParagraphCompatibilityHacks
-}
-\newcommand*{\ParagraphCompatibilityHacks}{%
-  \PackageWarning{contract}{compatibility hacks for `\string\Paragraph'
-    executed.\MessageBreak
-    There is no support for documents using these hacks!\MessageBreak
-    There is no warranty for real compatibility!\MessageBreak
-    Even if the LaTeX run of the document doesn't report\MessageBreak
-    any error, the result may be completely wrong.\MessageBreak
-    Therefore it is recommended to solve the problem,\MessageBreak
-    instead of trying to work around using the\MessageBreak
-    compatibility hacks%
-  }%
-  \gdef\Paragraph{\Clause}%
-  \gdef\SubParagraph{\SubClause}%
-  \gdef\c@Paragraph{\c@Clause}%
-  \gdef\cl@Paragraph{\cl@Clause}%
-  \gdef\c@SubParagraph{\c@SubClause}%
-  \gdef\cl@SubParagraph{\cl@SubClause}%
-  \gdef\theParagraph{\theClause}%
-  \gdef\theSubParagraph{\theSubClause}%
-  \gdef\refParagraph{\refClause}%
-  \gdef\refParagraphN{\refClauseN}%
-  \aliaskomafont{Paragraph}{Clause}%
-  \scr@ifundefinedorrelax{Paragraphmark}{}{%
-    \global\let\Clausemark\Paragraphmark
-  }%
-}
-\providecommand*{\Paragraph}{\DeprecatedParagraph\Paragraph}
-\providecommand*{\SubParagraph}{\DeprecatedParagraph\SubParagraph}
-\providecommand*{\refParagraph}{\DeprecatedParagraph\refParagraph}
-\providecommand*{\refParagraphN}{\DeprecatedParagraph\refParagraphN}
-%</body>
-%    \end{macrocode}
-% \end{command}
-%
+% \changes{v0.92}{2025/11/12}{deprecated \pkg{scrjura} commands removed}
 %
 % \section{Contracts, Clauses, Paragraphs and Sentences}
-%
 %
 % \begin{macro}{\contract@env@type}
 % \changes{scrjura-v0.5d}{2010/04/28}{new}

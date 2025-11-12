@@ -2,12 +2,12 @@
 
 --[[
   Build script for LaTeX package contract.
-  Copyright (c) 2023-2024 Markus Kohm
+  Copyright (c) 2023-2025 Markus Kohm
 
   This file is part of the build system of contract.
 ]]
 
-release_info = "2024-06-07 v0.92"
+release_info = "2025-11-12 v0.92"
 -- Bundle and modules
 
 module       = "contract"

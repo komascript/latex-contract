@@ -1,8 +1,8 @@
 # The LaTeX package `contract`
 
-Copyright © 2007–2024 Markus Kohm
+Copyright © 2007–2025 Markus Kohm
 
-Release: 2024-06-07 v0.92
+Release: 2025-11-12 v0.92
 
 License: LPPL 1.3c
 
