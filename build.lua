@@ -47,9 +47,9 @@ uploadconfig = {
 Support is offered for both German and English texts.]],
   topic       = "legal",
   ctanPath    = "/macros/latex/contrib/contract",
-  bugtracker  = "https://github.com/komascript/latex-contract/issues",
-  home        = "https://github.com/komascript/latex-contract",
-  repository  = "https://github.com/komascript/latex-contract.git",
+  bugtracker  = "https://codeberg.org/komascript/latex-contract/issues",
+  home        = "https://codeberg.org/komascript/latex-contract",
+  repository  = "https://codeberg.org/komascript/latex-contract.git",
 }
 
 -- Typesetting

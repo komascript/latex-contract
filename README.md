@@ -10,7 +10,16 @@ KOMA presents the KOMA-Script spin-off `contract`. Package `contract` provides
 environments for legal contracts, sections, paragraphs and similar. It is the
 official successor to the former KOMA-Script package `scrjura`.
 
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+The project is currently hosted and managed on
+[Codeberg](https://codeberg.org/komascript/latex-contract). For safety
+reasons, the repository will continue to be mirrored on
+[GitHub](https://github.com/komascript/latex-contract) for some time. However,
+error reports and push requests will only be acknowledged on
+[Codeberg](https://codeberg.org/komascript/latex-contract).
+
+------------------------------------------------------------------------------
 
 This work may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, version 1.3c of the license.
@@ -23,7 +32,7 @@ The Current Maintainer and author of this work is Markus Kohm.
 
 This work consists of the files listed in MANIFEST.md.
 
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 # Abstract
 
@@ -37,11 +46,11 @@ purpose of the package.
 
 # Contributors/Collaborators
 
- - *Markus Kohm aka KOMA aka [komascript](https://github.com/komascript)*:  
+ - *Markus Kohm aka KOMA aka [komascript](https://codeberg.org/komascript)*:  
  Maintainer, Developer, “go-to guy”
  
  - *[Keks-Dose](https://github.com/Keks-Dose)*:  
- CTAN Release Manager, Tester, “idea man”
+ Tester, “idea man”
 
 
 # Installation for Users
@@ -53,8 +62,8 @@ TeX distribution to install the package.
 # Unpacking for Distributors
 
 Distributors should [download the current
-release](https://github.com/komascript/latex-contract/releases). See
-[`MANIFEST.md`](https://github.com/komascript/latex-contract/blob/main/MANIFEST.md)
+release](https://codeberg.org/komascript/latex-contract/releases). See
+[`MANIFEST.md`](https://codeberg.org/komascript/latex-contract/src/branch/main/MANIFEST.md)
 for information about the files, that build the distribution.
 
 If distributors also want to distribute `contract.sty`, they can
@@ -72,10 +81,10 @@ and then use the files from the selected `<TDS root directory>`.
 
 Developers who want the current developer version of the code to be installed
 for testing, should clone [the `latex-contract`
-repository](https://github.com/komascript/latex-contract), e.g.,
+repository](https://codeberg.org/komascript/latex-contract.git), e.g.,
 using
 
-	git clone https://github.com/komascript/latex-contract.git
+	git clone https://codeberg.org/komascript/latex-contract.git
 
 You can than unpack and install `contract` using:
 
@@ -89,10 +98,10 @@ CTAN. So you usually cannot use `l3build doc` to generate the documentation or
 `l3build install --full` to install `contract` with the documentation. Instead
 you either have to read `contract.dtx` or use the `contract.pdf` available at
 the newest [`contract`
-release](https://github.com/komascript/latex-contract/releases) or [the
+release](https://codeberg.org/komascript/latex-contract/releases) or [the
 `release`
-branch](https://github.com/komascript/latex-contract/tree/release). You can
-copy such PDFs to the `doc/latex/contract/` folder of any TEXMF tree.
+branch](https://codeberg.org/komascript/latex-contract/src/branch/release). You
+can copy such PDFs to the `doc/latex/contract/` folder of any TEXMF tree.
 
 # How to get the Manual
 
@@ -102,9 +111,9 @@ After installation of `contract` and the user manual you can use:
 	
 Without installation you can get `contract.pdf` as part of the corresponding
 [`contract`
-release](https://github.com/komascript/latex-contract/releases) or [the
+release](https://codeberg.org/komascript/latex-contract/releases) or [the
 `release`
-branch](https://github.com/komascript/latex-contract/tree/release).
+branch](https://codeberg.org/komascript/latex-contract/src/branch/release).
 
 # How to Contribute
 
@@ -120,16 +129,16 @@ include your test file.
 
 If you think you have found a bug (or another kind of issue) using
 `contract` you should use [the issue
-tracker](https://github.com/komascript/latex-contract/issues). Please
+tracker](https://codeberg.org/komascript/latex-contract/issues). Please
 first search for similar issues already reported and maybe also already fixed
 and closed. Maybe the replies to such a similar report would help you too.
 
 If your issue is new, you should report it also using [the issue
-tracker](https://github.com/komascript/latex-contract/issues). Please be kind,
+tracker](https://codeberg.org/komascript/latex-contract/issues). Please be kind,
 not only when writing the report but also when reading replies and commenting
 or answering. And please always add a minimal working example and usually the
 relevant parts of the `log`-file to your report. Please use the [markdown for
-code](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
+code](https://docs.codeberg.org/markdown/preformatted-text/)
 to add such files into the text of your report. The correct language
 identifier for LaTeX code would be `latex`. For `log`-files you won't need any
 language identifier. Usually you should not use attachments for code or
@@ -147,8 +156,8 @@ that page.
 
 # Milestones
 
-The development has just begun. Currently [the first
-milestone](https://github.com/komascript/latex-contract/milestone/1):
+The development has just begun. Currently the first
+milestone:
 
  - [x] creating a new repository
  - [x] copying `scrjura.dtx` from KOMA-Script as `contract.dtx` to the new
@@ -168,7 +177,7 @@ has been reached.
 
 Further milestones could be:
 
- - [ ] replacing `scrjura` by a `contract` wrapper in KOMA-Script for
+ - [x] replacing `scrjura` by a `contract` wrapper in KOMA-Script for
        compatibility only
  - [ ] reimplementing several internals of `contract`:
    - [ ] replacing KOMA-Script options by LaTeX key-value options
