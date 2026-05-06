@@ -287,7 +287,11 @@ TSWLatexianTemp*
 # auto folder when using emacs and auctex
 ./auto/*
 *.el
+# temporary files of emacs and emerge
 *~
+*.orig
+\#*
+.\#*
 
 # expex forward references with \gathertags
 *-tags.tex
