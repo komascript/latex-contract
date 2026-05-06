@@ -150,10 +150,10 @@ useles.
 # How to Say Thank You for my Work
 
 Hey, I'm doing this as a hobby. So no need to say thank you. But I'm a vain
-fop, so I'm certainly up for a quick thank you by email. On komascript.de you
-can find an [explanation of my wishes](https://komascript.de/wunschliste) if
-you want to give more. If you don't understand German, just click to links at
-that page.
+fop, so I'm certainly up for a quick thank you by email. If you want to give
+more have a look to my
+[wishlist](https://koma-script.sourceforge.io/wunschliste). It is also
+available [in German](https://koma-script.sourceforge.io/de/koma/wishlist/).
 
 # Milestones
 
