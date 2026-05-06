@@ -1,8 +1,8 @@
 # The LaTeX package `contract`
 
-Copyright © 2007–2024 Markus Kohm
+Copyright © 2007–2026 Markus Kohm
 
-Release: 2024-02-07 v0.91
+Release: 2026-04-23 v0.92
 
 License: LPPL 1.3c
 
@@ -10,7 +10,16 @@ KOMA presents the KOMA-Script spin-off `contract`. Package `contract` provides
 environments for legal contracts, sections, paragraphs and similar. It is the
 official successor to the former KOMA-Script package `scrjura`.
 
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+The project is currently hosted and managed on
+[Codeberg](https://codeberg.org/komascript/latex-contract). For safety
+reasons, the repository will continue to be mirrored on
+[GitHub](https://github.com/komascript/latex-contract) for some time. However,
+error reports and push requests will only be acknowledged on
+[Codeberg](https://codeberg.org/komascript/latex-contract).
+
+------------------------------------------------------------------------------
 
 This work may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, version 1.3c of the license.
@@ -23,7 +32,7 @@ The Current Maintainer and author of this work is Markus Kohm.
 
 This work consists of the files listed in MANIFEST.md.
 
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 # Abstract
 
@@ -35,64 +44,26 @@ KOMA-Script and has since been called `contract`. The new name was chosen to
 avoid confusion with KOMA-Script packages. Secondly, it better reflects the
 purpose of the package.
 
+# Contributors/Collaborators
+
+ - *Markus Kohm aka KOMA aka [komascript](https://codeberg.org/komascript)*:  
+ Maintainer, Developer, “go-to guy”
+ 
+ - *[Keks-Dose](https://github.com/Keks-Dose)*:  
+ Tester, “idea man”
+
+
 # Installation for Users
 
-If you are a user, I would usually say, that you should wait until the
-package has been added to your preferred TeX distribution. Then you can use
-the package manager of your TeX distribution to install the package. But in
-case of `contract` it currently seems, that it could not be uploaded to CTAN
-and therefore will never be part of any TeX distribution. So if you would like
-to use the package, you would need to
-
- - [Download the current
-release](https://github.com/komascript/latex-contract/releases)  
- You can either use the file named “**Source code** (zip)” or the file “**Source
- code** (tar.gz)”. Windows users are recommended to use the zip. By
- downloading the file you will get something like `latex-contract-0.91.zip`
- resp. `latex-contract-0.91.tar.gz`.
-
- - Unpack the downloaded file  
- The downloaded file is an archive, that contains several files. Despite the
- Windows File Explorer and also Mac-OS, KDE's Dolphin, Gnome's Nautilus and
- many other file managers are able to open such archive files, you should
- instead right-click on it to extract it. I recommend to keep the directory
- structure while extracting. This gives a new directory
- `latex-contract-<version>`, e.g., `latex-contract-0.91`.
-
- - Open a shell/terminal in the new directory `latex-contract-<version>`.
-
- - Use `l3build` to install the package and the documentation:
-
-        l3build install --full
-
-   
-If you don't get an error message, the installation was successful and you
-should be able to use LaTeX package `contract`. To test, that LaTeX is able to
-find the file, try:
-
-    kpsewhich contract.sty
-	
-This should show you the whole path of the LaTeX package file.
-
-**Note:** The installation above is currently tested only with TeX
-Live. MiKTeX users may also need to run the `MiKTeX Console` to update the
-filename database. See the MiKTeX manual for more information.
-   
-**Note:** The installation described above, does not work for a snapshot
-archive or a git clone of the `main` branch. It only works for the `release`
-branch resp. [a release
-download](https://github.com/komascript/latex-contract/releases). For
-installation of a snapshot or git clone of the `main` branch see “[Unpacking
-and Installation for Developers](#unpacking-and-installation-for-developers)”
-below. For some reasons it also does not work for release v0.9. If you need to
-use release v0.9 see “[Unpacking and Installation for
-Developers](#unpacking-and-installation-for-developers)”.
+If you are a user, you should usually wait until the package has been added to
+your preferred TeX distribution. Then you can use the package manager of your
+TeX distribution to install the package.
 
 # Unpacking for Distributors
 
 Distributors should [download the current
-release](https://github.com/komascript/latex-contract/releases). See
-[`MANIFEST.md`](https://github.com/komascript/latex-contract/blob/main/MANIFEST.md)
+release](https://codeberg.org/komascript/latex-contract/releases). See
+[`MANIFEST.md`](https://codeberg.org/komascript/latex-contract/src/branch/main/MANIFEST.md)
 for information about the files, that build the distribution.
 
 If distributors also want to distribute `contract.sty`, they can
@@ -100,17 +71,20 @@ unpack it using:
 
     tex contract.dtx
 	
-For a temporary local installation see “[Installation for
-Users](#installation-for-users)” above.
+or temporary install `contract` into a TEXMF tree using:
+
+    l3build install --full --texmfhome <TDS root directory>
+	
+and then use the files from the selected `<TDS root directory>`.
 
 # Unpacking and Installation for Developers
 
 Developers who want the current developer version of the code to be installed
 for testing, should clone [the `latex-contract`
-repository](https://github.com/komascript/latex-contract), e.g.,
+repository](https://codeberg.org/komascript/latex-contract.git), e.g.,
 using
 
-	git clone https://github.com/komascript/latex-contract.git
+	git clone https://codeberg.org/komascript/latex-contract.git
 
 You can than unpack and install `contract` using:
 
@@ -124,10 +98,10 @@ CTAN. So you usually cannot use `l3build doc` to generate the documentation or
 `l3build install --full` to install `contract` with the documentation. Instead
 you either have to read `contract.dtx` or use the `contract.pdf` available at
 the newest [`contract`
-release](https://github.com/komascript/latex-contract/releases) or [the
+release](https://codeberg.org/komascript/latex-contract/releases) or [the
 `release`
-branch](https://github.com/komascript/latex-contract/tree/release). You can
-copy such PDFs to the `doc/latex/contract/` folder of any TEXMF tree.
+branch](https://codeberg.org/komascript/latex-contract/src/branch/release). You
+can copy such PDFs to the `doc/latex/contract/` folder of any TEXMF tree.
 
 # How to get the Manual
 
@@ -137,43 +111,35 @@ After installation of `contract` and the user manual you can use:
 	
 Without installation you can get `contract.pdf` as part of the corresponding
 [`contract`
-release](https://github.com/komascript/latex-contract/releases) or [the
+release](https://codeberg.org/komascript/latex-contract/releases) or [the
 `release`
-branch](https://github.com/komascript/latex-contract/tree/release).
+branch](https://codeberg.org/komascript/latex-contract/src/branch/release).
 
 # How to Contribute
 
 To become a contributor, e.g., do heavy testing. If you find an issue, please
 [report it](#how-to-report-issues). You can also become a developer and, e.g.,
-make new test files to the packageP. See the
+make new test files to the package. See the
 [`l3build`](https://ctan.org/pkg/l3build) manual for more information about
 tests. If you've created a new test and think that it would be useful, please
-either do a pull request or [add a new issue](#how-to-report-issues) and
-include your test file.
-
-If you would like to have the package on CTAN and also in TeX distributions,
-you can become the CTAN release agent of `latex-contract`. To do this,
-however, you must first convince the CTAN team that `contract` is a suitable,
-not too generic name for a new LaTeX package. Unfortunately, I was not able to
-do this. Queries to me about this and about possible renaming of the package
-are undesirable and risk further stalling the development of this LaTeX
-package and all my other LaTeX packages.
-
+either do a [pull
+request](https://codeberg.org/komascript/latex-contract/pulls) or [add a new
+issue](#how-to-report-issues) and include your test file.
 
 # How to Report Issues
 
 If you think you have found a bug (or another kind of issue) using
 `contract` you should use [the issue
-tracker](https://github.com/komascript/latex-contract/issues). Please
+tracker](https://codeberg.org/komascript/latex-contract/issues). Please
 first search for similar issues already reported and maybe also already fixed
 and closed. Maybe the replies to such a similar report would help you too.
 
 If your issue is new, you should report it also using [the issue
-tracker](https://github.com/komascript/latex-contract/issues). Please be kind,
+tracker](https://codeberg.org/komascript/latex-contract/issues). Please be kind,
 not only when writing the report but also when reading replies and commenting
 or answering. And please always add a minimal working example and usually the
 relevant parts of the `log`-file to your report. Please use the [markdown for
-code](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
+code](https://docs.codeberg.org/markdown/preformatted-text/)
 to add such files into the text of your report. The correct language
 identifier for LaTeX code would be `latex`. For `log`-files you won't need any
 language identifier. Usually you should not use attachments for code or
@@ -184,15 +150,15 @@ useles.
 # How to Say Thank You for my Work
 
 Hey, I'm doing this as a hobby. So no need to say thank you. But I'm a vain
-fop, so I'm certainly up for a quick thank you by email. On komascript.de you
-can find an [explanation of my wishes](https://komascript.de/wunschliste) if
-you want to give more. If you don't understand German, just click to links at
-that page.
+fop, so I'm certainly up for a quick thank you by email. If you want to give
+more have a look to my
+[wishlist](https://koma-script.sourceforge.io/wunschliste). It is also
+available [in German](https://koma-script.sourceforge.io/de/koma/wishlist/).
 
 # Milestones
 
-The development has just begun. Currently [the first
-milestone](https://github.com/komascript/latex-contract/milestone/1):
+The development has just begun. Currently the first
+milestone:
 
  - [x] creating a new repository
  - [x] copying `scrjura.dtx` from KOMA-Script as `contract.dtx` to the new
@@ -212,12 +178,13 @@ has been reached.
 
 Further milestones could be:
 
- - [ ] replacing `scrjura` by a `contract` wrapper in KOMA-Script for
+ - [x] replacing `scrjura` by a `contract` wrapper in KOMA-Script for
        compatibility only
  - [ ] reimplementing several internals of `contract`:
    - [ ] replacing KOMA-Script options by LaTeX key-value options
    - [ ] replacing \newkomafont, \setkomafont by something not KOMA-Script
-         related or alterntively internally uses `scrkbase` by `scrextend`,
+         related or alterntively replacing the the internally used `scrkbase`
+         by `scrextend`,
    - [ ] using `expl3`, 
    - [ ] using the new paragraph hooks of LaTeX,
    - [ ] using the extended referencing mechanism of LaTeX.

@@ -2,12 +2,12 @@
 
 --[[
   Build script for LaTeX package contract.
-  Copyright (c) 2023-2024 Markus Kohm
+  Copyright (c) 2023-2026 Markus Kohm
 
   This file is part of the build system of contract.
 ]]
 
-release_info = "2024-02-07 v0.91"
+release_info = "2026-04-23 v0.92"
 -- Bundle and modules
 
 module       = "contract"
@@ -17,15 +17,15 @@ unpackfiles  = { "contract.dtx" }
 installfiles = { "contract.sty" }
 
 typesetfiles = {
-}
-
-docfiles     = {
+--}
+--
+--docfiles     = {
    "contract-example-en.tex",
    "contract.dtx",
    "contract-example-de.tex",
-   "contract-example-en.pdf",
-   "contract-example-de.pdf",
-   "contract.pdf"
+--   "contract-example-en.pdf",
+--   "contract-example-de.pdf",
+--   "contract.pdf"
 }
 
 -- Package
@@ -47,9 +47,9 @@ uploadconfig = {
 Support is offered for both German and English texts.]],
   topic       = "legal",
   ctanPath    = "/macros/latex/contrib/contract",
-  bugtracker  = "https://github.com/komascript/latex-contract/issues",
-  home        = "https://github.com/komascript/latex-contract",
-  repository  = "https://github.com/komascript/latex-contract.git",
+  bugtracker  = "https://codeberg.org/komascript/latex-contract/issues",
+  home        = "https://codeberg.org/komascript/latex-contract",
+  repository  = "https://codeberg.org/komascript/latex-contract.git",
 }
 
 -- Typesetting
