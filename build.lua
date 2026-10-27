@@ -7,7 +7,7 @@
   This file is part of the build system of contract.
 ]]
 
-release_info = "2026-04-23 v0.92"
+release_info = "2026-10-27 v0.93"
 -- Bundle and modules
 
 module       = "contract"
