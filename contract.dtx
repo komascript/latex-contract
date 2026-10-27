@@ -37,7 +37,7 @@
 %<package&identify>\DeclareCurrentRelease{v0.9}{2024-02-02}
 %<package&identify>\ProvidesPackage{contract}[%
 %<*dtx|(package&identify)>
-  2026-04-23 v0.92
+  2026-10-27 v0.93
 %<*dtx>
   source of
 %</dtx>
@@ -2625,25 +2625,27 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\@doendpe}
-% \LaTeX{} used this macro, to reset all paragraph actions at the end of
-% environments. To avoid unwanted switching-off of the paragraph number it
-% will be reinitialized.
+%   \LaTeX{} used this macro, to reset all paragraph actions at the end of
+%   environments. To avoid unwanted switching-off of the paragraph number it
+%   will be reinitialized.
 % \begin{macro}{\contract@doendpe}
-% \changes{v0.0.1}{2023-10-10}{\cs{scrjura@doendpe} renamed}
+%   \changes{v0.0.1}{2023-10-10}{\cs{scrjura@doendpe} renamed}
+%   \changes{v0.93}{2026-10-27}{reflecting the silent change in
+%     \LaTeX~2025-01-01}
 % \begin{macro}{\IncludeInRelease}
-% \changes{scrjura-v0.9e}{2015/11/03}{used temporary}
-% \changes{scrjura-v3.28}{2019/11/18}{\cs{ifstr} renamed into \cs{Ifstr}}
+%   \changes{scrjura-v0.9e}{2015/11/03}{used temporary}
+%   \changes{scrjura-v3.28}{2019/11/18}{\cs{ifstr} renamed into \cs{Ifstr}}
 % \begin{macro}{\@gobble@IncludeInRelease}
-% \changes{scrjura-v0.9e}{2015/11/03}{used temporary}
+%   \changes{scrjura-v0.9e}{2015/11/03}{used temporary}
 % \begin{macro}{\EndIncludeInRelease}
-% \changes{scrjura-v0.9e}{2015/11/03}{used temporary}
-% From \LaTeX{} 2015/01/01 a different definition of \cs{@doendpe} is used. So
-% we also have to use different versions depending on the release. We do so
-% with some tricks. Maybe this should be replaced by usage of
-% \cs{IfLTXAtLeastTF} from already loaded \pkg{scrbase}.
-% \begin{description}
-% \item[Todo:] Using \cs{everypar} is evil and should be replaced by using a
-%   generic paragraph hook.
+%   \changes{scrjura-v0.9e}{2015/11/03}{used temporary} From \LaTeX{}
+%   2015/01/01 a different definition of \cs{@doendpe} is used. So we also
+%   have to use different versions depending on the release. We do so with
+%   some tricks. Maybe this should be replaced by usage of \cs{IfLTXAtLeastTF}
+%   from already loaded \pkg{scrbase}.
+%   \begin{description}
+%   \item[Todo:] Using \cs{everypar} is evil and should be replaced by using a
+%     generic paragraph hook.
 % \end{description}
 %    \begin{macrocode}
 \providecommand*{\IncludeInRelease}[3]{%
@@ -2659,7 +2661,25 @@
     \expandafter\@gobble@IncludeInRelease
   }%
 }
-\IncludeInRelease{2015/01/01}{\@doendpe}{clubpenalty fix}
+\IncludeInRelease{2025/01/01}{\@doendpe}{paragraph number reactivation}
+\CheckCommand*\@doendpe{\@endpetrue
+     \def\par{\@restorepar
+              \clubpenalty\@clubpenalty
+              \@endpefalse
+              \everypar{}\par}%
+     \everypar
+         {{\setbox\z@\lastbox}%
+          \everypar{}\@endpefalse}}
+\newcommand*{\contract@doendpe}{\@endpetrue
+     \def\par{\@restorepar
+              \clubpenalty\@clubpenalty
+              \@endpefalse
+              \everypar{\csname contract@used@everypar\endcsname}\par}%
+     \everypar
+         {{\setbox\z@\lastbox}%
+          \everypar{\csname contract@used@everypar\endcsnme}\@endpefalse}}
+\EndIncludeInRelease
+\IncludeInRelease{2015/01/01}{\@doendpe}{paragraph number reactivation}
 \CheckCommand*\@doendpe{\@endpetrue
      \def\par{\@restorepar
               \clubpenalty\@clubpenalty
@@ -2684,7 +2704,7 @@
   }%
 }
 \EndIncludeInRelease
-\IncludeInRelease{0000/00/00}{\@doendpe}{clubpenalty fix}
+\IncludeInRelease{0000/00/00}{\@doendpe}{paragraph number reactivation}
 \CheckCommand*\@doendpe{\@endpetrue
   \def\par{\@restorepar\everypar{}\par\@endpefalse}\everypar
   {{\setbox\z@\lastbox}\everypar{}\@endpefalse}}
